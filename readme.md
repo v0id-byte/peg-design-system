@@ -6,6 +6,20 @@
 
 ---
 
+## Preview
+
+| Title slide | Types comparison |
+|---|---|
+| ![Title slide](docs/screenshots/01-title.png) | ![Types comparison](docs/screenshots/02-types.png) |
+
+| Data comparison table | Mechanism slide |
+|---|---|
+| ![Data comparison table](docs/screenshots/03-comparison.png) | ![Mechanism slide](docs/screenshots/04-mechanism.png) |
+
+![Depeg chart — pure SVG + CSS, no chart library](docs/screenshots/05-depeg-chart.png)
+
+---
+
 ## English
 
 ### What is Peg?
