@@ -1,0 +1,45 @@
+<!-- @dsCard group="Colors" viewport="700x128" subtitle="Core 6-token palette" name="Color Palette" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:var(--font);padding:20px 24px;-webkit-font-smoothing:antialiased;}
+  .row{display:flex;gap:12px;}
+  .sw{flex:1;}
+  .sw-box{height:46px;border-radius:5px;border:1px solid rgba(22,24,29,0.08);}
+  .sw-token{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-top:7px;}
+  .sw-hex{font-size:11.5px;color:var(--ink);font-variant-numeric:tabular-nums;margin-top:2px;}
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="sw">
+    <div class="sw-box" style="background:var(--paper);border-color:rgba(22,24,29,.18);"></div>
+    <div class="sw-token">--paper</div><div class="sw-hex">#FAFAF8</div>
+  </div>
+  <div class="sw">
+    <div class="sw-box" style="background:var(--ink);"></div>
+    <div class="sw-token">--ink</div><div class="sw-hex">#16181D</div>
+  </div>
+  <div class="sw">
+    <div class="sw-box" style="background:var(--night);"></div>
+    <div class="sw-token">--night</div><div class="sw-hex">#0B0B0C</div>
+  </div>
+  <div class="sw">
+    <div class="sw-box" style="background:var(--jade);"></div>
+    <div class="sw-token">--jade</div><div class="sw-hex">#00A878</div>
+  </div>
+  <div class="sw">
+    <div class="sw-box" style="background:var(--alert);"></div>
+    <div class="sw-token">--alert</div><div class="sw-hex">#E5484D</div>
+  </div>
+  <div class="sw">
+    <div class="sw-box" style="background:var(--mute);"></div>
+    <div class="sw-token">--mute</div><div class="sw-hex">#8A8A8E</div>
+  </div>
+</div>
+</body>
+</html>

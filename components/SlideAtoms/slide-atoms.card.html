@@ -1,0 +1,37 @@
+<!-- @dsCard group="Components" viewport="700x160" subtitle="Chip pill & StatPair number block" name="Slide Atoms" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:var(--font);padding:18px 24px;-webkit-font-smoothing:antialiased;}
+  .section-label{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:10px;}
+  .chips{display:flex;gap:12px;margin-bottom:18px;}
+  .chip{display:inline-flex;align-items:center;gap:5px;border:1.5px solid rgba(22,24,29,.16);border-radius:999px;padding:7px 16px;font-size:13px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;}
+  .chip-k{color:var(--ink);}
+  .chip-v{color:var(--mute);font-weight:500;}
+  .stats{display:flex;gap:40px;}
+  .stat-n{font-size:32px;font-weight:700;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink);}
+  .stat-n.jade{color:var(--jade);}
+  .stat-l{font-size:10px;color:var(--mute);margin-top:5px;line-height:1.35;}
+  hr{border:none;border-top:1px solid rgba(22,24,29,.08);margin:14px 0;}
+</style>
+</head>
+<body>
+  <div class="section-label">Chip</div>
+  <div class="chips">
+    <div class="chip"><span class="chip-k">US</span><span class="chip-v">· Jul 2025</span></div>
+    <div class="chip"><span class="chip-k">Hong Kong</span><span class="chip-v">· Aug 2025</span></div>
+    <div class="chip"><span class="chip-k">EU</span><span class="chip-v">· MiCA</span></div>
+  </div>
+  <hr>
+  <div class="section-label">StatPair</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">84%</div><div class="stat-l">of the market is<br>USDT + USDC</div></div>
+    <div class="stat"><div class="stat-n jade">$306B</div><div class="stat-l">total market size<br>end of 2025</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--alert);">$40B</div><div class="stat-l">lost in UST<br>collapse 2022</div></div>
+  </div>
+</body>
+</html>

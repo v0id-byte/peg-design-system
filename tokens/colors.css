@@ -1,0 +1,24 @@
+:root {
+  /* ─── Base palette ─────────────────────────── */
+  --color-paper:  #FAFAF8;   /* warm off-white — the only background */
+  --color-ink:    #16181D;   /* near-black */
+  --color-night:  #0B0B0C;   /* deep black — stage, outer chrome */
+  --color-jade:   #00A878;   /* single accent — positive, data, emphasis */
+  --color-alert:  #E5484D;   /* single danger — depeg, collapse, error */
+  --color-mute:   #8A8A8E;   /* secondary text, labels, footnotes */
+
+  /* ─── Semantic aliases ─────────────────────── */
+  --bg-default:   var(--color-paper);
+  --bg-inverse:   var(--color-night);
+
+  --fg-default:   var(--color-ink);
+  --fg-muted:     var(--color-mute);
+  --fg-accent:    var(--color-jade);
+  --fg-danger:    var(--color-alert);
+  --fg-inverse:   var(--color-paper);
+
+  /* ─── Borders / dividers ───────────────────── */
+  --border-chip:    rgba(22, 24, 29, 0.16);
+  --border-subtle:  rgba(22, 24, 29, 0.22);
+  --border-default: rgba(22, 24, 29, 0.34);
+}

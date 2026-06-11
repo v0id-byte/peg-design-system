@@ -1,0 +1,27 @@
+<!-- @dsCard group="Type" viewport="700x160" subtitle="Tabular numerals & tight tracking for figures" name="Numerics" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper);padding:32px;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  .row{display:flex;align-items:baseline;gap:40px;margin-bottom:20px}
+  .on{font-size:52px;font-weight:700;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--color-ink)}
+  .off{font-size:52px;font-weight:700;letter-spacing:-0.04em;line-height:1;color:var(--color-mute)}
+  .label{font-size:11px;color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace;align-self:center}
+  .accent{color:var(--color-jade)}
+  .danger{color:var(--color-alert)}
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="on">$306B</div>
+  <div class="on accent">84%</div>
+  <div class="on danger">$3.3B</div>
+  <div class="label">font-variant-numeric: tabular-nums<br>Always on for figures in slides</div>
+</div>
+<div style="font-size:12px;color:var(--color-mute);font-family:'SF Mono','Fira Mono',monospace">--fw-bold: 700 &nbsp;·&nbsp; --ls-wordmark: –0.04em &nbsp;·&nbsp; tnum class on all numeric elements</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- @dsCard group="Spacing" viewport="700x195" subtitle="Canvas margins, layout anchors & spacing scale" name="Spacing Tokens" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:var(--font);padding:18px 24px;-webkit-font-smoothing:antialiased;}
+  .section{margin-bottom:14px;}
+  .section:last-child{margin-bottom:0;}
+  .section-label{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:8px;}
+  .row{display:flex;gap:8px;align-items:center;}
+  .bar-wrap{display:flex;gap:6px;align-items:center;}
+  .bar{height:8px;background:var(--ink);border-radius:2px;flex-shrink:0;}
+  .bar.jade{background:var(--jade);}
+  .bar.mute{background:var(--mute);opacity:.35;}
+  .tok{font-size:10px;font-weight:600;color:var(--ink);min-width:90px;}
+  .val{font-size:10px;color:var(--mute);font-variant-numeric:tabular-nums;}
+  .grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+  .sp{display:flex;flex-direction:column;align-items:flex-start;gap:4px;}
+  .sp-bar{background:var(--jade);height:6px;border-radius:1px;}
+  .sp-tok{font-size:9px;font-weight:600;letter-spacing:.03em;color:var(--ink);}
+  .sp-val{font-size:9px;color:var(--mute);font-variant-numeric:tabular-nums;}
+</style>
+</head>
+<body>
+  <div class="section">
+    <div class="section-label">Canvas anchors</div>
+    <div style="display:flex;flex-direction:column;gap:5px;">
+      <div class="row">
+        <div class="bar jade" style="width:75px;"></div>
+        <div class="tok">--margin</div>
+        <div class="val">150px — 8% inset, all sides</div>
+      </div>
+      <div class="row">
+        <div class="bar mute" style="width:52px;"></div>
+        <div class="tok">--footer-b</div>
+        <div class="val">64px — footer bottom offset</div>
+      </div>
+      <div class="row">
+        <div class="bar" style="width:100%;height:1px;background:var(--mute);opacity:.25;max-width:200px;"></div>
+        <div class="tok">--peg-y</div>
+        <div class="val">620px — signature peg-line y position</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-label">Spacing scale</div>
+    <div class="grid">
+      <div class="sp"><div class="sp-bar" style="width:6px;"></div><div class="sp-tok">xs</div><div class="sp-val">18px</div></div>
+      <div class="sp"><div class="sp-bar" style="width:9px;"></div><div class="sp-tok">sm</div><div class="sp-val">28px</div></div>
+      <div class="sp"><div class="sp-bar" style="width:16px;"></div><div class="sp-tok">md</div><div class="sp-val">48px</div></div>
+      <div class="sp"><div class="sp-bar" style="width:27px;"></div><div class="sp-tok">lg</div><div class="sp-val">80px</div></div>
+      <div class="sp"><div class="sp-bar" style="width:47px;"></div><div class="sp-tok">xl</div><div class="sp-val">140px</div></div>
+      <div class="sp"><div class="sp-bar" style="width:83px;"></div><div class="sp-tok">2xl</div><div class="sp-val">250px</div></div>
+    </div>
+  </div>
+</body>
+</html>

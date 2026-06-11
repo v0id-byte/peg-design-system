@@ -1,0 +1,45 @@
+<!-- @dsCard group="Spacing" viewport="700x260" subtitle="Base spacing scale + slide canvas constants" name="Spacing Scale" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper);padding:28px 32px;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  h4{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:14px}
+  .scale{display:flex;gap:6px;align-items:flex-end;margin-bottom:22px}
+  .bar-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .bar{background:var(--color-ink);width:18px;border-radius:2px 2px 0 0}
+  .val{font-size:9px;color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace}
+  .token{font-size:9px;color:var(--color-jade);font-family:"SF Mono","Fira Mono",monospace}
+  .canvas-row{display:flex;gap:28px;flex-wrap:wrap}
+  .cv{font-size:11px;line-height:1.5;color:var(--color-ink)}
+  .cv b{font-weight:600}
+  .cv code{font-family:"SF Mono","Fira Mono",monospace;font-size:10px;color:var(--color-mute)}
+</style>
+</head>
+<body>
+<h4>Spacing Scale</h4>
+<div class="scale">
+  <div class="bar-wrap"><div class="bar" style="height:4px"></div><div class="token">sp-1</div><div class="val">4</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:8px"></div><div class="token">sp-2</div><div class="val">8</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:12px"></div><div class="token">sp-3</div><div class="val">12</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:16px"></div><div class="token">sp-4</div><div class="val">16</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:24px"></div><div class="token">sp-5</div><div class="val">24</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:32px"></div><div class="token">sp-6</div><div class="val">32</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:40px"></div><div class="token">sp-7</div><div class="val">40</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:48px"></div><div class="token">sp-8</div><div class="val">48</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:64px"></div><div class="token">sp-9</div><div class="val">64</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:80px"></div><div class="token">sp-10</div><div class="val">80</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:96px"></div><div class="token">sp-11</div><div class="val">96</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:120px"></div><div class="token">sp-12</div><div class="val">120</div></div>
+  <div class="bar-wrap"><div class="bar" style="height:150px;background:var(--color-jade)"></div><div class="token" style="color:var(--color-jade)">sp-13</div><div class="val">150</div></div>
+</div>
+<div class="canvas-row">
+  <div class="cv"><b>Slide margin</b> <code>--slide-margin: 150px</code></div>
+  <div class="cv"><b>Peg Y</b> <code>--slide-peg-y: 620px</code></div>
+  <div class="cv"><b>Footer baseline</b> <code>--slide-foot-b: 64px</code></div>
+</div>
+</body>
+</html>

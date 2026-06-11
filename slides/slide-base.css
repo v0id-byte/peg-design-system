@@ -1,0 +1,59 @@
+/* ============================================================
+   PEG SLIDE BASE — utility classes for 1920 × 1080 canvas
+   Link alongside styles.css in any slide deck.
+   ============================================================ */
+
+section { font-family: var(--font-sans); letter-spacing: -0.01em; overflow: hidden; }
+section.paper { background: var(--color-paper); color: var(--color-ink); }
+
+/* Content frame respecting the 8% margins */
+.frame { position: absolute; inset: var(--slide-margin); }
+
+/* ── Type roles ──────────────────────────────────────────── */
+.wordmark { font-size: var(--fz-wordmark); font-weight: var(--fw-bold);    letter-spacing: var(--ls-wordmark); line-height: var(--lh-tight); }
+.hero     { font-size: var(--fz-hero);     font-weight: var(--fw-bold);    letter-spacing: var(--ls-hero);     line-height: var(--lh-tight); font-variant-numeric: tabular-nums; }
+.headline { font-size: var(--fz-headline); font-weight: var(--fw-semibold);letter-spacing: var(--ls-headline); line-height: var(--lh-snug);  text-wrap: balance; max-width: 1400px; }
+.subhead  { font-size: var(--fz-subhead);  font-weight: var(--fw-semibold);letter-spacing: var(--ls-subhead);  line-height: var(--lh-snug);  text-wrap: balance; }
+.support  { font-size: var(--fz-support);  font-weight: var(--fw-regular); line-height: var(--lh-body); }
+.caption  { font-size: var(--fz-caption);  font-weight: var(--fw-regular); color: var(--fg-muted); letter-spacing: 0; }
+
+/* Colour utilities */
+.jade  { color: var(--color-jade); }
+.alert { color: var(--color-alert); }
+.mute  { color: var(--color-mute); }
+.tnum  { font-variant-numeric: tabular-nums; }
+
+/* ── Footer system ───────────────────────────────────────── */
+.foot-src { position: absolute; left: var(--slide-margin); bottom: var(--slide-foot-b); font-size: var(--fz-caption); color: var(--fg-muted); letter-spacing: 0; max-width: 1100px; }
+.foot-num { position: absolute; right: var(--slide-margin); bottom: var(--slide-foot-b); font-size: var(--fz-caption); color: var(--fg-muted); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+
+/* ── Peg line ────────────────────────────────────────────── */
+.peg { position: absolute; left: 154px; top: var(--slide-peg-y); width: calc(var(--slide-w) - 308px); height: 0; }
+.peg::before { content: ""; position: absolute; left: 0; right: 0; top: 0; border-top: var(--line-weight) solid var(--color-ink); }
+.peg.faint::before { border-top-color: var(--line-color-faint); }
+.peg .peg-label { position: absolute; top: -46px; font-size: var(--fz-caption); color: var(--fg-muted); font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.peg .peg-dot { position: absolute; right: -6px; top: -5px; width: var(--peg-dot-size); height: var(--peg-dot-size); border-radius: 50%; background: var(--peg-dot-color); }
+
+/* ── Flow band ───────────────────────────────────────────── */
+.flow { position: absolute; left: var(--slide-margin); right: var(--slide-margin); top: 505px; display: flex; align-items: center; }
+.flow .node { flex: 0 0 auto; font-size: 52px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; line-height: 1.05; white-space: nowrap; color: var(--color-ink); }
+.flow .node.jade { color: var(--color-jade); }
+.flow .conn { flex: 1 1 0; height: 2px; background: var(--border-subtle); position: relative; margin: 0 46px; }
+.flow .conn::after { content: ""; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); border-left: 15px solid var(--border-default); border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
+
+/* ── Chip row ────────────────────────────────────────────── */
+.chips { display: flex; gap: 40px; }
+.chip { border: 2px solid var(--border-chip); border-radius: var(--radius-pill); padding: 26px 48px; font-size: 38px; font-weight: var(--fw-semibold); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.chip .chip-k { color: var(--color-ink); }
+.chip .chip-v { color: var(--fg-muted); font-weight: var(--fw-medium); }
+
+/* ── Attr list ───────────────────────────────────────────── */
+.attrs { display: flex; flex-direction: column; gap: 42px; }
+.attrs .attr { font-size: 42px; font-weight: var(--fw-regular); line-height: 1.18; letter-spacing: -0.01em; color: var(--fg-muted); }
+.attrs .attr b { font-weight: var(--fw-semibold); color: var(--color-ink); }
+.attrs .attr b.jade { color: var(--color-jade); }
+
+/* ── Stat pair ───────────────────────────────────────────── */
+.stats { display: flex; gap: 140px; }
+.stat .stat-n { font-size: 96px; font-weight: var(--fw-bold); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .stat-l { font-size: 26px; color: var(--fg-muted); margin-top: 18px; letter-spacing: 0; line-height: 1.3; }

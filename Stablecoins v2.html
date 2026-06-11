@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stablecoins</title>
+<style>
+  @font-face {
+    font-family: 'Inter';
+    src: url('./uploads/Inter.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: block;
+  }
+</style>
+<style>
+  /* ============================================================
+     STABLECOINS — Apple-keynote design system
+     Canvas: 1920 × 1080 (16:9). Margins ~8% (150px).
+     ============================================================ */
+  :root{
+    --paper:#FAFAF8;
+    --ink:#16181D;
+    --night:#0B0B0C;
+    --jade:#00A878;
+    --alert:#E5484D;
+    --mute:#8A8A8E;
+
+    --fz-wordmark:248px;
+    --fz-hero:300px;
+    --fz-headline:92px;
+    --fz-subhead:60px;
+    --fz-support:44px;
+    --fz-caption:28px;
+
+    --margin:150px;
+    --peg-y:620px;
+    --peg-x0:154px;
+    --peg-x1:1766px;
+
+    --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Inter,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;background:#000;}
+  body{font-family:var(--font);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  deck-stage:not(:defined){visibility:hidden;}
+
+  section{font-family:var(--font);letter-spacing:-0.01em;overflow:hidden;}
+  .paper{background:var(--paper);color:var(--ink);}
+
+  .frame{position:absolute;inset:var(--margin);}
+
+  .wordmark{font-size:var(--fz-wordmark);font-weight:700;letter-spacing:-0.04em;line-height:1;}
+  .hero{font-size:var(--fz-hero);font-weight:700;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;}
+  .headline{font-size:var(--fz-headline);font-weight:600;letter-spacing:-0.03em;line-height:1.06;max-width:1400px;text-wrap:balance;}
+  .subhead{font-size:var(--fz-subhead);font-weight:600;letter-spacing:-0.02em;line-height:1.12;text-wrap:balance;}
+  .support{font-size:var(--fz-support);font-weight:400;line-height:1.4;color:var(--ink);}
+  .caption{font-size:var(--fz-caption);font-weight:400;color:var(--mute);letter-spacing:0;}
+  .jade{color:var(--jade);}
+  .alert{color:var(--alert);}
+  .mute{color:var(--mute);}
+  .tnum{font-variant-numeric:tabular-nums;}
+
+  .foot-src{position:absolute;left:var(--margin);bottom:64px;font-size:var(--fz-caption);color:var(--mute);letter-spacing:0;max-width:1100px;}
+  .foot-num{position:absolute;right:var(--margin);bottom:64px;font-size:var(--fz-caption);color:var(--mute);font-variant-numeric:tabular-nums;letter-spacing:0.04em;}
+
+  /* ---- peg line ---- */
+  .peg{position:absolute;left:var(--peg-x0);top:var(--peg-y);width:calc(var(--peg-x1) - var(--peg-x0));height:0;}
+  .peg::before{content:"";position:absolute;left:0;right:0;top:0;border-top:2px solid var(--ink);}
+  .peg.faint::before{border-top-color:rgba(22,24,29,0.22);}
+  .peg .peg-label{position:absolute;left:0;top:-46px;font-size:var(--fz-caption);color:var(--mute);font-variant-numeric:tabular-nums;letter-spacing:0.02em;}
+  .peg .peg-dot{position:absolute;right:-6px;top:-5px;width:10px;height:10px;border-radius:50%;background:var(--jade);}
+
+  /* ---- flow band ---- */
+  .flow{position:absolute;left:var(--margin);right:var(--margin);top:505px;display:flex;align-items:center;}
+  .flow .node{flex:0 0 auto;font-size:52px;font-weight:600;letter-spacing:-0.02em;line-height:1.05;white-space:nowrap;color:var(--ink);}
+  .flow .node.jade{color:var(--jade);}
+  .flow .conn{flex:1 1 0;height:2px;background:rgba(22,24,29,0.22);position:relative;margin:0 46px;}
+  .flow .conn::after{content:"";position:absolute;right:-1px;top:50%;transform:translateY(-50%);
+        border-left:15px solid rgba(22,24,29,0.34);
+        border-top:9px solid transparent;border-bottom:9px solid transparent;}
+
+  .count{font-variant-numeric:tabular-nums;}
+
+  .attrs{display:flex;flex-direction:column;gap:42px;}
+  .attrs .attr{font-size:42px;font-weight:400;line-height:1.18;letter-spacing:-0.01em;color:var(--mute);}
+  .attrs .attr b{font-weight:600;color:var(--ink);}
+  .attrs .attr b.k-jade{color:var(--jade);}
+
+  .chips{display:flex;gap:40px;}
+  .chip{border:2px solid rgba(22,24,29,0.16);border-radius:999px;padding:26px 48px;
+        font-size:38px;font-weight:600;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;}
+  .chip .chip-k{color:var(--ink);}
+  .chip .chip-v{color:var(--mute);font-weight:500;}
+
+  .stats{display:flex;gap:140px;}
+  .stat .stat-n{font-size:96px;font-weight:700;letter-spacing:-0.03em;line-height:1;font-variant-numeric:tabular-nums;}
+  .stat .stat-l{font-size:26px;color:var(--mute);margin-top:18px;letter-spacing:0;line-height:1.3;}
+
+  #s9-drop{stroke-dasharray:1200;stroke-dashoffset:0;}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#FAFAF8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FAFAF8"/>
+    <text x="600" y="430" text-anchor="middle" font-family="-apple-system,Helvetica,Arial,sans-serif" font-weight="700" font-size="180" letter-spacing="-8" fill="#16181D">$1.00</text>
+    <line x1="220" y1="500" x2="980" y2="500" stroke="#16181D" stroke-width="6"/>
+    <circle cx="980" cy="500" r="16" fill="#00A878"/>
+  </svg>
+</template>
+<deck-stage width="1920" height="1080" no-rail>
+
+  <!-- ════════════════════ SLIDE 01 · Title ════════════════════ -->
+  <section class="paper" data-label="Title">
+    <div class="frame">
+      <div class="subhead mute build d1" style="position:absolute;left:2px;top:110px;font-weight:500;font-size:var(--fz-support);">The $1 tokens that suddenly matter to the whole world.</div>
+      <div class="wordmark build d2" style="position:absolute;left:0;top:250px;">Stablecoins</div>
+    </div>
+    <div class="peg build d3"><span class="peg-label" style="left:auto;right:44px;">$1.00</span><span class="peg-dot"></span></div>
+    <div class="caption build d4" style="position:absolute;left:var(--margin);bottom:120px;">Presenter A &amp; Presenter B&nbsp;&nbsp;·&nbsp;&nbsp;AP Economics&nbsp;&nbsp;·&nbsp;&nbsp;June 2026</div>
+    <div class="foot-num">01</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 02 · Hook ════════════════════ -->
+  <section class="paper" data-label="The hook">
+    <div class="frame" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
+      <div class="headline build d1" style="max-width:1500px;"><span class="jade">2025:</span> the year everyone rushed in.</div>
+      <div class="caption build d3" style="margin-top:80px;letter-spacing:0.18em;text-transform:uppercase;font-size:24px;">
+        US&nbsp;&nbsp;·&nbsp;&nbsp;Hong&nbsp;Kong&nbsp;&nbsp;·&nbsp;&nbsp;EU&nbsp;&nbsp;·&nbsp;&nbsp;UK&nbsp;&nbsp;·&nbsp;&nbsp;Singapore&nbsp;&nbsp;·&nbsp;&nbsp;Korea
+      </div>
+    </div>
+    <div class="foot-src">GENIUS Act (2025); HK Stablecoins Ordinance (2025)</div>
+    <div class="foot-num">02</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 03 · What it actually is ════════════════════ -->
+  <section class="paper" data-label="What it actually is">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">A private digital dollar.</div>
+      <div class="subhead build d2" style="position:absolute;left:0;top:250px;max-width:1520px;font-weight:500;font-size:46px;line-height:1.32;color:var(--ink);">
+        A token you can always redeem for <span class="jade">$1</span> — really an IOU on the company that issued it, backed 1:1 by reserves it holds.
+      </div>
+      <div class="stats build d3" style="position:absolute;left:2px;top:560px;">
+        <div class="stat"><div class="stat-n count" data-to="84" data-suf="%" data-cdelay="360">84%</div><div class="stat-l">of the market is<br>USDT + USDC</div></div>
+        <div class="stat"><div class="stat-n count" data-to="306" data-pre="$" data-suf="B" data-cdelay="360">$306B</div><div class="stat-l">total market size<br>end of 2025</div></div>
+      </div>
+    </div>
+    <div class="foot-src">Decrypt / DeFiLlama (2025); Brookings (2025)</div>
+    <div class="foot-num">03</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 04 · Two types of stablecoins ════════════════════ -->
+  <section class="paper" data-label="Two types">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">Not all "stable" coins work the same way.</div>
+      <div class="build d2" style="position:absolute;left:0;top:215px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
+        <!-- Collateralized -->
+        <div style="border-top:3px solid var(--jade);padding-top:40px;">
+          <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--jade);margin-bottom:24px;">Collateralized</div>
+          <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:26px;">Backed by<br>real assets</div>
+          <div style="font-size:34px;color:var(--mute);line-height:1.44;margin-bottom:26px;">Each token matched 1:1 with cash, US Treasuries, or other safe assets held in reserve.</div>
+          <div style="font-size:34px;font-weight:600;color:var(--ink);">USDT · USDC</div>
+          <div style="margin-top:14px;font-size:27px;color:var(--jade);font-weight:500;">← This deck's focus</div>
+        </div>
+        <!-- Algorithmic -->
+        <div style="border-top:3px solid rgba(22,24,29,0.14);padding-top:40px;">
+          <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);margin-bottom:24px;">Algorithmic</div>
+          <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;color:var(--mute);margin-bottom:26px;">Held by<br>math alone</div>
+          <div style="font-size:34px;color:var(--mute);line-height:1.44;margin-bottom:26px;">No real reserves — a formula was supposed to maintain the $1 peg through code and incentives.</div>
+          <div style="font-size:34px;font-weight:600;color:var(--alert);">UST · collapsed 2022</div>
+          <div style="margin-top:14px;font-size:27px;color:var(--mute);">~$40B gone in days</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-src">Brookings (2025); BIS FSI Briefs No. 27 (2025)</div>
+    <div class="foot-num">04</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 05 · Where does a stablecoin fit? ════════════════════ -->
+  <section class="paper" data-label="Where does it fit?">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">Where does a stablecoin fit?</div>
+      <div class="build d2" style="position:absolute;left:0;top:188px;right:0;">
+        <!-- Header -->
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding-bottom:20px;border-bottom:2px solid var(--ink);">
+          <div></div>
+          <div style="font-size:40px;font-weight:600;letter-spacing:-0.015em;">Cash</div>
+          <div style="font-size:40px;font-weight:600;letter-spacing:-0.015em;">Bank deposit</div>
+          <div style="font-size:40px;font-weight:600;letter-spacing:-0.015em;color:var(--jade);">Stablecoin</div>
+        </div>
+        <!-- Safety -->
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding:20px 0;border-bottom:1px solid rgba(22,24,29,0.1);">
+          <div style="font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--mute);align-self:center;">Safety</div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Gov't backed<br><span style="color:var(--mute);font-size:25px;">legal tender</span></div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Deposit insurance<br><span style="color:var(--mute);font-size:25px;">up to $250k (US)</span></div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Commercial credit<br><span style="color:var(--mute);font-size:25px;">issuer's liability only</span></div>
+        </div>
+        <!-- Interest -->
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding:20px 0;border-bottom:1px solid rgba(22,24,29,0.1);">
+          <div style="font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--mute);align-self:center;">Interest</div>
+          <div style="font-size:30px;color:var(--ink);">None</div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Low<br><span style="color:var(--mute);font-size:25px;">~0.5–5% p.a.</span></div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">None to you<br><span style="color:var(--jade);font-size:25px;font-weight:600;">issuer keeps it all</span></div>
+        </div>
+        <!-- Speed -->
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding:20px 0;border-bottom:1px solid rgba(22,24,29,0.1);">
+          <div style="font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--mute);align-self:center;">Speed</div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Instant<br><span style="color:var(--mute);font-size:25px;">physical only</span></div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">1–3 days<br><span style="color:var(--mute);font-size:25px;">cross-border wire</span></div>
+          <div style="font-size:30px;color:var(--jade);font-weight:600;line-height:1.38;">Minutes, 24/7<br><span style="color:var(--mute);font-size:25px;font-weight:400;">global, any hour</span></div>
+        </div>
+        <!-- Access -->
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding:20px 0;">
+          <div style="font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:var(--mute);align-self:center;">Access</div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Physical only<br><span style="color:var(--mute);font-size:25px;">must be present</span></div>
+          <div style="font-size:30px;color:var(--ink);line-height:1.38;">Requires a<br><span style="color:var(--mute);font-size:25px;">bank account</span></div>
+          <div style="font-size:30px;color:var(--jade);font-weight:600;line-height:1.38;">Phone only<br><span style="color:var(--mute);font-size:25px;font-weight:400;">no bank needed</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-src">BIS FSI Briefs No. 27 (2025); Brookings (2025)</div>
+    <div class="foot-num">05</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 06 · Financial properties ════════════════════ -->
+  <section class="paper" data-label="Financial properties">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">So what kind of money is it?</div>
+      <div class="attrs build d2" style="position:absolute;left:0;top:300px;max-width:1560px;">
+        <div class="attr"><b>Stable by design</b> — pegged to $1</div>
+        <div class="attr"><b class="k-jade">Fully backed</b> — a redeemable claim on reserves</div>
+        <div class="attr"><b>Earns the issuer, not you</b> — pays no interest to holders</div>
+        <div class="attr"><b>Spends like cash, 24/7</b> — but no legal tender or deposit insurance</div>
+      </div>
+    </div>
+    <div class="foot-src">BIS, FSI Briefs No. 27 (2025); Brookings (2025)</div>
+    <div class="foot-num">06</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 07 · How the peg holds ════════════════════ -->
+  <section class="paper" data-label="How the peg holds">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">How does it stay at exactly $1?</div>
+      <div class="build d2" style="position:absolute;left:0;top:230px;display:flex;align-items:center;gap:64px;">
+        <div style="font-size:120px;font-weight:700;letter-spacing:-0.04em;" class="tnum">$1</div>
+        <div style="font-size:88px;color:var(--mute);font-weight:300;">⇄</div>
+        <div style="font-size:120px;font-weight:700;letter-spacing:-0.04em;">1 token</div>
+      </div>
+      <div class="subhead build d3" style="position:absolute;left:0;top:560px;">Held by reserves, redemption &amp; <span class="jade">arbitrage</span>.</div>
+    </div>
+    <div class="peg faint build d3"><span class="peg-label" style="left:auto;right:44px;">$1.00</span></div>
+    <div class="foot-src">GENIUS Act (2025); HK Stablecoins Ordinance (2025)</div>
+    <div class="foot-num">07</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 08 · The money machine ════════════════════ -->
+  <section class="paper" data-label="The money machine">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">So how do issuers make money?</div>
+    </div>
+    <div class="flow build d2">
+      <div class="node">Your $</div>
+      <div class="conn"></div>
+      <div class="node">US Treasuries</div>
+      <div class="conn"></div>
+      <div class="node jade">Interest</div>
+    </div>
+    <div class="support build d3" style="position:absolute;left:var(--margin);top:800px;color:var(--mute);font-size:32px;">+ a small <span style="color:var(--ink);font-weight:600;" class="tnum"><span class="count" data-to="0.1" data-dec="1" data-cdelay="420">0.1</span>–<span class="count" data-to="0.2" data-dec="1" data-cdelay="420">0.2</span>%</span> fee to mint or redeem</div>
+    <div class="foot-src">36Kr (2025); BIS, FSI Briefs No. 27 (2025)</div>
+    <div class="foot-num">08</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 09 · Reserve quality ════════════════════ -->
+  <section class="paper" data-label="Reserve quality">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">"We have the reserves." — Says who?</div>
+      <div class="build d2" style="position:absolute;left:0;top:218px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
+        <!-- Attestation -->
+        <div style="border-top:3px solid rgba(22,24,29,0.14);padding-top:38px;">
+          <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);margin-bottom:22px;">What most issuers provide</div>
+          <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:26px;">Attestation</div>
+          <div style="font-size:33px;color:var(--mute);line-height:1.46;">Management says the reserves exist. An accountant confirms the numbers on paper — but does <em>not</em> independently trace each asset back to its real-world source.</div>
+        </div>
+        <!-- Full Audit -->
+        <div style="border-top:3px solid var(--jade);padding-top:38px;">
+          <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--jade);margin-bottom:22px;">The gold standard</div>
+          <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;color:var(--jade);margin-bottom:26px;">Full Audit</div>
+          <div style="font-size:33px;color:var(--mute);line-height:1.46;">An independent auditor traces every reserve asset to its real-world source and formally certifies those assets genuinely exist.</div>
+        </div>
+      </div>
+      <div class="build d3" style="position:absolute;left:0;top:648px;max-width:1520px;">
+        <div style="font-size:38px;font-weight:500;line-height:1.36;color:var(--ink);">Stability rests on <span class="jade">trust in the proof</span> — not just the promise.</div>
+        <div style="margin-top:14px;font-size:30px;color:var(--mute);">Tether's comprehensive independent audit remains pending as of 2025.</div>
+      </div>
+    </div>
+    <div class="foot-src">36Kr (2025); BIS FSI Briefs No. 27 (2025)</div>
+    <div class="foot-num">09</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 10 · Stablecoins & US debt ════════════════════ -->
+  <section class="paper" data-label="Stablecoins & US debt">
+    <div class="frame">
+      <div class="caption build d1" style="position:absolute;left:0;top:30px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);">Why governments care</div>
+      <div class="headline build d2" style="position:absolute;left:0;top:120px;max-width:1500px;">
+        Every dollar in becomes <span class="jade">new demand for US debt</span>.
+      </div>
+    </div>
+    <div class="flow build d3">
+      <div class="node">Your $</div>
+      <div class="conn"></div>
+      <div class="node">USDT</div>
+      <div class="conn"></div>
+      <div class="node">US Treasuries</div>
+    </div>
+    <div class="foot-src">Ante, Saggu &amp; Fiedler (2025), via 36Kr (2025)</div>
+    <div class="foot-num">10</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 11 · The global race ════════════════════ -->
+  <section class="paper" data-label="The global race">
+    <div class="frame">
+      <div class="headline build d1" style="position:absolute;left:0;top:0;">Everyone wants in.</div>
+      <div class="chips build d2" style="position:absolute;left:0;top:300px;">
+        <div class="chip"><span class="chip-k">US</span> <span class="chip-v">· Jul 2025</span></div>
+        <div class="chip"><span class="chip-k">Hong Kong</span> <span class="chip-v">· Aug 2025</span></div>
+        <div class="chip"><span class="chip-k">EU</span> <span class="chip-v">· MiCA</span></div>
+      </div>
+      <div class="subhead build d3" style="position:absolute;left:0;top:560px;max-width:1450px;">
+        Mainland China restricts crypto — <span class="jade">Hong Kong is the sandbox</span>.
+      </div>
+    </div>
+    <div class="foot-src">Library of Congress (2025); Morgan Lewis (2025); 36Kr (2025)</div>
+    <div class="foot-num">11</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 12 · Upside & one myth ════════════════════ -->
+  <section class="paper" data-label="Upside & one myth">
+    <div class="frame">
+      <div class="build d1" style="position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:22px;">
+        <div class="support mute" style="font-size:34px;">A dollar account for anyone — no US bank</div>
+        <div class="support mute" style="font-size:34px;">Cross-border payments in minutes, for cents</div>
+        <div class="support mute" style="font-size:34px;">24/7, programmable money</div>
+      </div>
+      <div style="position:absolute;left:0;top:470px;">
+        <div class="subhead mute build d3" style="font-weight:500;text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--mute);">"Crypto is private and untraceable."</div>
+        <div class="headline build d4" style="margin-top:38px;">Reality: <span class="jade">public, traceable, freezable</span>.</div>
+        <div class="build d5" style="margin-top:40px;font-size:30px;color:var(--mute);"><span class="count tnum" data-to="3.3" data-dec="1" data-pre="$" data-suf="B" data-cdelay="660" style="color:var(--ink);font-weight:600;">$3.3B</span> frozen by issuers — 7,000+ wallets, 2023–25</div>
+      </div>
+    </div>
+    <div class="foot-src">Brookings (2025); Chainalysis (2025–26); AMLBot (2025)</div>
+    <div class="foot-num">12</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 13 · When it isn't stable ════════════════════ -->
+  <section class="paper" data-label="When it isn't stable">
+    <div class="frame" style="inset:var(--margin) var(--margin) auto var(--margin);">
+      <div class="headline build d1">When stablecoins aren't stable.</div>
+    </div>
+
+    <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
+      <line x1="154" y1="620" x2="1766" y2="620" stroke="#8A8A8E" stroke-width="2" stroke-dasharray="6 10"/>
+      <line x1="154" y1="620" x2="1120" y2="620" stroke="#16181D" stroke-width="3"/>
+      <path id="s9-drop" d="M1120 620 C 1206 622, 1248 702, 1300 722 C 1372 750, 1452 856, 1560 884"
+            fill="none" stroke="#E5484D" stroke-width="4" stroke-linecap="round"/>
+      <circle id="s9-usdc" cx="1300" cy="722" r="11" fill="#E5484D"/>
+      <circle id="s9-ust" cx="1560" cy="884" r="11" fill="#E5484D"/>
+    </svg>
+
+    <div class="peg-label" style="position:absolute;left:154px;top:574px;font-size:var(--fz-caption);color:var(--mute);font-variant-numeric:tabular-nums;">$1.00</div>
+    <div id="s9-label-usdc" class="caption" style="position:absolute;left:1330px;top:684px;color:var(--alert);font-weight:600;font-size:26px;line-height:1.3;">USDC&nbsp;·&nbsp;<span class="count" data-from="1" data-to="0.87" data-dec="2" data-pre="~$" data-cdelay="1150">~$0.87</span><br><span style="color:var(--mute);font-weight:400;">Mar 2023, bank failure</span></div>
+    <div id="s9-label-ust" class="caption" style="position:absolute;left:1090px;width:430px;text-align:right;top:846px;color:var(--alert);font-weight:600;font-size:26px;line-height:1.3;">UST&nbsp;·&nbsp;collapsed<br><span style="color:var(--mute);font-weight:400;">2022, <span class="count" data-to="40" data-pre="~$" data-suf="B" data-cdelay="1700">~$40B</span> gone</span></div>
+
+    <div class="subhead build d2" style="position:absolute;left:var(--margin);top:330px;color:var(--ink);">Runs, depegs &amp; opaque reserves.</div>
+
+    <div class="foot-src">Widely reported; Chainalysis, via CryptoTimes (2026)</div>
+    <div class="foot-num">13</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 14 · Companies or central banks? ════════════════════ -->
+  <section class="paper" data-label="Companies or central banks">
+    <div class="frame" style="display:flex;flex-direction:column;justify-content:center;">
+      <div class="caption build d1" style="letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);margin-bottom:48px;">Who should issue digital money?</div>
+      <div class="hero build d2" style="font-size:140px;line-height:1.05;">Companies, or<br><span class="jade">central banks</span>?</div>
+    </div>
+    <div class="foot-src">Synthesis: Brookings (2025); BIS</div>
+    <div class="foot-num">14</div>
+  </section>
+
+  <!-- ════════════════════ SLIDE 15 · Conclusion & references ════════════════════ -->
+  <section class="paper" data-label="Conclusion & references">
+    <div class="frame">
+      <div class="subhead build d1" style="max-width:1620px;font-size:52px;line-height:1.18;">
+        A stablecoin is a private digital dollar — held at $1 by <span class="jade">reserves and arbitrage</span>, funded by US Treasuries. That's why the world now races to regulate it.
+      </div>
+      <div class="build d2" style="position:absolute;left:0;bottom:0;column-count:2;column-gap:90px;width:100%;font-size:24px;line-height:1.5;color:var(--mute);letter-spacing:0;">
+        <div style="font-size:26px;color:var(--ink);font-weight:600;margin-bottom:18px;column-span:all;">References</div>
+        <p>1. U.S. Congress. <em>GENIUS Act.</em> 2025.</p>
+        <p>2. Hong Kong SAR. <em>Stablecoins Ordinance (Cap. 656).</em> Eff. 1 Aug 2025.</p>
+        <p>3. European Union. <em>Markets in Crypto-Assets (MiCA).</em> 2023.</p>
+        <p>4. BIS. <em>FSI Briefs No. 27 — Stablecoin-related yields.</em> 2025.</p>
+        <p>5. Ante, Saggu &amp; Fiedler. <em>Tether &amp; short-term Treasury yields.</em> 2025.</p>
+        <p>6. Brookings Institution. <em>Stablecoins &amp; the GENIUS Act.</em> 2025.</p>
+        <p>7. Knowledge@Wharton. <em>Stablecoins &amp; the GENIUS Act.</em> 2026.</p>
+        <p>8. Chainalysis. <em>Stablecoin-tracing analyses.</em> 2025–26.</p>
+        <p>9. AMLBot / Cryptonews. <em>Stablecoin freezes 2023–2025.</em> 2025–26.</p>
+        <p>10. Decrypt / DeFiLlama. <em>The Year in Stablecoins 2025.</em> 2025.</p>
+        <p>11. 36Kr. <em>Analysis of Stablecoins.</em> 2025.</p>
+        <p>12. 小Lin说. 《一口气了解稳定币》. Bilibili, 2025.</p>
+      </div>
+    </div>
+    <div class="foot-num">15</div>
+  </section>
+
+</deck-stage>
+
+<script type="application/json" id="speaker-notes">
+[
+  "Hi everyone. Today [Name] and I are going to talk about stablecoins — a type of cryptocurrency that's designed to always be worth exactly one dollar. They sound boring. But in 2025 they became one of the most fought-over things in global finance. By the end, you'll see why a token that never changes price has governments around the world racing to control it.",
+  "In 2025, the United States passed its first-ever federal stablecoin law, the GENIUS Act. Within months, Hong Kong, the EU, the UK, Singapore, and Korea all moved to regulate stablecoins too. That's strange — why would so many governments suddenly write rules for a token that's designed never to change in value? Here's a personal angle: years ago, when I was trading crypto in China, you couldn't just use cash — you first had to convert your money into a stablecoin called USDT. So our question today is simple: what is this $1 token, how does it actually work, and why does it suddenly matter to entire governments?",
+  "Most cryptocurrencies, like Bitcoin, swing wildly in price — which makes them useless for everyday payments. A stablecoin fixes that by pegging its value to something stable, almost always one US dollar. So one unit of USDT is meant to always equal one dollar. Really, a stablecoin is a private digital dollar: a token you can always redeem for a dollar, which makes it an IOU on the company that issued it, backed one-to-one by reserves it claims to hold. Two coins dominate: Tether's USDT and Circle's USDC — together about 84% of a market worth roughly 306 billion dollars at the end of 2025. But 'stable' is a promise, not a guarantee. In 2022 a different kind of stablecoin, an algorithmic one called UST, broke its peg and collapsed in days. We'll come back to that.",
+  "Before going further, one distinction that trips up a lot of beginners. Not all stablecoins work the same way. The mainstream ones — USDT and USDC — are collateralized: every token is backed 1:1 by real assets, typically cash or US Treasuries held by the issuer. But there's a second, much riskier kind: algorithmic stablecoins. These have no real reserves at all. Instead, a mathematical formula and a set of coded incentives is supposed to keep the price at one dollar. The most famous example, UST, collapsed in May 2022 and wiped out roughly 40 billion dollars in just a few days. This deck focuses entirely on collateralized stablecoins — they are the market mainstream and the target of nearly all new regulation.",
+  "Now — where exactly does a stablecoin sit in the world of money? Compare it to cash and a bank deposit. On safety: cash is government money, the safest thing possible. A bank deposit has FDIC insurance up to $250,000. A stablecoin? Only as safe as the private company behind it — a company's liability with no government guarantee. On interest: cash pays nothing, banks pay a little, and stablecoins pay you nothing either — the issuer keeps all the interest earned on those reserves. That's actually the entire business model. Where stablecoins genuinely win is speed and access: you can send them anywhere in the world in minutes, around the clock, with nothing but a smartphone — no bank account required. That is why they matter enormously in countries with weak banking systems.",
+  "So what kind of money is this, really? Think of it as a private, fully-reserved money-market instrument — a kind of 'near-money.' It's useful like cash: stable by design, spendable around the clock, and always redeemable for a dollar. But notice what it is and isn't. It earns interest for the issuer, never for you. And unlike the dollars in your bank account, it's a company's liability, not government money — there's no legal-tender status and no deposit insurance standing behind it. So it's powerful and convenient, but its safety rests entirely on the issuer actually holding the reserves it claims.",
+  "How does a private token hold its value at exactly one dollar? Two mechanisms. First, reserves: for every token in circulation, the issuer claims to hold one real dollar — in cash or safe assets — that you can always redeem. Second, arbitrage: if the price ever drifts above a dollar, traders create new tokens and sell them for a small profit, pushing the price back down; if it dips below a dollar, they buy cheap and redeem for a full dollar, pushing it back up. So the peg is actually held in place by ordinary traders chasing tiny profits. The whole thing rests on one thing: trust that the reserves are real.",
+  "Here's the part most people miss. If the token is basically free to use, how does the company behind it make money? When you hand over a dollar, they don't let it sit idle — they buy US government bonds, called Treasuries, which pay interest, and they keep that interest for themselves. They also charge a small fee, around 0.1 to 0.2%, to create or cash out coins. With hundreds of billions of dollars in reserves, that interest adds up to enormous profits. The catch: this only works while interest rates are high. If the central bank cuts rates, that easy money shrinks fast.",
+  "Here's the hidden risk most introductions skip. When an issuer says 'we have the reserves,' how do you actually verify that? There are two very different levels of proof. An attestation — which is what most issuers provide — is essentially management saying 'we have the money,' with an accountant confirming the numbers on paper. That is not the same as an independent auditor physically tracing every reserve asset back to its real-world source. That is a full audit, and it's a much higher bar. The key point for beginners: a stablecoin's safety rests not just on having reserves, but on being able to prove they are real. As of 2025, Tether — the world's largest stablecoin, managing hundreds of billions of dollars — has still not completed a comprehensive independent audit. We would never accept that level of opacity from a bank.",
+  "Now the real reason governments care. Because reserves are mostly US Treasuries, every dollar that flows into stablecoins becomes new demand for US government debt. That's a gift to the US — it helps fund the deficit and keeps borrowing cheap. Researchers have found Tether's Treasury buying is now large enough to actually move interest rates: for every 1% it gains in the short-term Treasury market, one-month yields drop by almost four basis points. And because these are dollar tokens used all over the world, they quietly push the dollar deeper into global digital payments. That's why the US doesn't fight stablecoins — it welcomes them.",
+  "So a global race is on. The US passed the GENIUS Act in July 2025. Hong Kong's Stablecoins Ordinance took effect on August 1st, 2025 — now you need a license from Hong Kong's monetary authority just to issue one. Even Chinese tech giants like JD.com and Ant Group announced plans to enter, mainly aiming at cross-border payments. There's a fascinating split here: mainland China bans crypto trading, while Hong Kong is being used as a controlled testing ground. This is exactly the world I glimpsed from the bottom up — ordinary people reaching for USDT to move money — now being fought over by the biggest players in finance.",
+  "So what's actually good about them? Three big things. One — financial inclusion: anyone with a phone can hold US dollars without a US bank account, which is a lifeline in countries with runaway inflation. Two — payments: sending money across borders takes minutes and costs cents, instead of days and big fees through banks. Three — it's programmable money that works around the clock. Now let me bust one myth. People assume crypto is private and untraceable. For mainstream stablecoins, the opposite is true. Every transaction lives on a public ledger, forensics firms like Chainalysis trace them, and the issuers can freeze your coins — Tether alone froze about 3.3 billion dollars across more than 7,000 wallets between 2023 and 2025. That's bad for privacy — but it's actually good for the world: stolen funds get recovered and criminal money gets blocked.",
+  "But there's a darker side. Stablecoins can suffer bank-run-style panics. In 2022 the algorithmic coin UST lost its peg and collapsed in days, erasing around 40 billion dollars. In March 2023, even the well-respected USDC briefly fell to about 87 cents when a bank holding its reserves failed — it recovered, but it showed how fragile trust can be. There are also real questions about whether reserves are fully safe and properly audited. And because they move value so easily, stablecoins now show up in a large share of on-chain crime — Chainalysis estimates around 84% of fraudulent on-chain volume. This is exactly why regulators stepped in.",
+  "So where does this leave us? Stablecoins are clearly useful — cheaper payments, dollar access, more transparency — and they prop up the US dollar. But they also hand a lot of power to a few private companies, and they can fail suddenly. The deeper question is who should issue digital money: private firms, through stablecoins, or governments, through central bank digital currencies like China's digital yuan? That's the real battle behind the headlines — and it's only just beginning.",
+  "To sum up: a stablecoin is a private digital dollar, held at one dollar by reserves and arbitrage. Issuers profit by parking those reserves in US Treasuries — and that quietly props up US government debt and the dollar's global role. That's why governments everywhere are now racing to regulate it. Thanks for listening — we're happy to take any questions."
+]
+</script>
+
+<script src="deck-stage.js"></script>
+<script>
+(function(){
+  const deck = document.querySelector('deck-stage');
+  if(!deck) return;
+  const EASE = 'cubic-bezier(.2,.65,.2,1)';
+  const delayFor = el =>
+    el.classList.contains('d1') ? 80  :
+    el.classList.contains('d2') ? 200 :
+    el.classList.contains('d3') ? 320 :
+    el.classList.contains('d4') ? 440 :
+    el.classList.contains('d5') ? 560 : 0;
+  const canMove = () =>
+    document.visibilityState === 'visible' &&
+    !deck.hasAttribute('noscale') &&
+    !matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  const fmtNum = (v, dec, pre, suf) =>
+    pre + v.toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec}) + suf;
+  function animateCount(el){
+    const to    = parseFloat(el.dataset.to);
+    const from  = el.dataset.from !== undefined ? parseFloat(el.dataset.from) : 0;
+    const dec   = el.dataset.dec   ? parseInt(el.dataset.dec)   : 0;
+    const pre   = el.dataset.pre   || '';
+    const suf   = el.dataset.suf   || '';
+    const dur   = el.dataset.cdur  ? parseInt(el.dataset.cdur)  : 900;
+    const delay = el.dataset.cdelay? parseInt(el.dataset.cdelay): 0;
+    const t0 = performance.now() + delay;
+    el.textContent = fmtNum(from, dec, pre, suf);
+    function frame(now){
+      let t = (now - t0) / dur;
+      if(t < 0){ requestAnimationFrame(frame); return; }
+      if(t >= 1){ el.textContent = fmtNum(to, dec, pre, suf); return; }
+      const e = 1 - Math.pow(1 - t, 3);
+      el.textContent = fmtNum(from + (to - from) * e, dec, pre, suf);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function play(slide, index){
+    if(!slide || !canMove()) return;
+    slide.querySelectorAll('.build').forEach(el=>{
+      el.animate(
+        [{opacity:0, transform:'translateY(22px)'},{opacity:1, transform:'none'}],
+        {duration:820, delay:delayFor(el), easing:EASE, fill:'backwards'}
+      );
+    });
+    slide.querySelectorAll('.count').forEach(animateCount);
+    if(index === 12){                      // Slide 13 (0-indexed) — peg-break moment
+      const q = s => slide.querySelector(s);
+      const drop = q('#s9-drop');
+      if(drop) drop.animate([{strokeDashoffset:1200},{strokeDashoffset:0}],
+        {duration:1400, delay:450, easing:'cubic-bezier(.5,0,.6,1)', fill:'backwards'});
+      const fall = (el, d) => el && el.animate(
+        [{opacity:0, transform:'translateY(-24px)'},{opacity:1, transform:'none'}],
+        {duration:720, delay:d, easing:EASE, fill:'backwards'});
+      fall(q('#s9-usdc'), 1050);
+      fall(q('#s9-ust'), 1550);
+      const fade = (el, d) => el && el.animate([{opacity:0},{opacity:1}],
+        {duration:600, delay:d, fill:'backwards'});
+      fade(q('#s9-label-usdc'), 1200);
+      fade(q('#s9-label-ust'), 1700);
+    }
+  }
+
+  deck.addEventListener('slidechange', e => play(e.detail.slide, e.detail.index));
+})();
+</script>
+</body>
+</html>

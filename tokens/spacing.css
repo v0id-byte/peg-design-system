@@ -1,0 +1,29 @@
+:root {
+  /* ─── Slide canvas ──────────────────────────── */
+  --slide-w:       1920px;
+  --slide-h:       1080px;
+  --slide-margin:   150px;   /* 8 % of canvas width — all four sides  */
+  --slide-peg-y:    620px;   /* signature peg-line vertical position  */
+  --slide-foot-b:    64px;   /* footer baseline from bottom           */
+
+  /* ─── Spacing scale ─────────────────────────── */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  48px;
+  --sp-9:  64px;
+  --sp-10: 80px;
+  --sp-11: 96px;
+  --sp-12: 120px;
+  --sp-13: 150px;   /* = --slide-margin */
+
+  /* ─── Border radii ──────────────────────────── */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-pill: 999px;   /* chips, tags */
+}

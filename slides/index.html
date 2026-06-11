@@ -1,0 +1,128 @@
+<!-- @dsCard group="Slides" viewport="1280x720" subtitle="7 template layouts — title, headline, stats, flow, chips, attrs, moment" name="Slide Templates" -->
+<!-- @startingPoint section="Slides" subtitle="7 production-ready slide template layouts" viewport="1920x1080" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peg — Slide Templates</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="slide-base.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000}
+  body{font-family:var(--font-sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  deck-stage:not(:defined){visibility:hidden}
+  /* Small-caps template label — top-right of each slide */
+  .tmpl{position:absolute;right:var(--slide-margin);top:64px;font-size:22px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-mute)}
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080" no-rail>
+
+  <!-- ══ 01 TITLE ═════════════════════════════════════════ -->
+  <section class="paper" data-screen-label="01 Title">
+    <div class="tmpl">Title</div>
+    <div class="frame">
+      <div class="support mute" style="position:absolute;left:2px;top:110px;font-weight:500">Your tagline or deck subtitle here.</div>
+      <div class="wordmark" style="position:absolute;left:0;top:250px">Brand Name</div>
+    </div>
+    <div class="peg">
+      <span class="peg-label" style="left:auto;right:44px">$1.00</span>
+      <span class="peg-dot"></span>
+    </div>
+    <div class="caption" style="position:absolute;left:var(--slide-margin);bottom:120px">Presenter · Organization · Date</div>
+    <div class="foot-num">01</div>
+  </section>
+
+  <!-- ══ 02 HEADLINE ══════════════════════════════════════ -->
+  <section class="paper" data-screen-label="02 Headline">
+    <div class="tmpl">Headline</div>
+    <div class="frame">
+      <div class="headline" style="position:absolute;left:0;top:0">Your main point in one clear, memorable statement.</div>
+      <div style="position:absolute;left:0;top:290px;max-width:1520px;font-size:46px;font-weight:500;line-height:1.32;color:var(--color-ink);letter-spacing:-0.01em;font-family:var(--font-sans)">
+        A supporting sentence that provides context, data, or nuance —<br>kept to two lines maximum.
+      </div>
+    </div>
+    <div class="foot-num">02</div>
+  </section>
+
+  <!-- ══ 03 STATS ═════════════════════════════════════════ -->
+  <section class="paper" data-screen-label="03 Stats">
+    <div class="tmpl">Stats</div>
+    <div class="frame">
+      <div class="headline" style="position:absolute;left:0;top:0">The numbers that anchor the argument.</div>
+      <div class="stats" style="position:absolute;left:2px;top:530px">
+        <div class="stat">
+          <div class="stat-n jade">$000B</div>
+          <div class="stat-l">short descriptor for<br>this first metric</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">00%</div>
+          <div class="stat-l">short descriptor for<br>this second metric</div>
+        </div>
+      </div>
+    </div>
+    <div class="foot-num">03</div>
+  </section>
+
+  <!-- ══ 04 FLOW ══════════════════════════════════════════ -->
+  <section class="paper" data-screen-label="04 Flow">
+    <div class="tmpl">Flow</div>
+    <div class="frame">
+      <div class="headline" style="position:absolute;left:0;top:0">How value moves, step by step.</div>
+    </div>
+    <div class="flow">
+      <div class="node">Node A</div>
+      <div class="conn"></div>
+      <div class="node">Node B</div>
+      <div class="conn"></div>
+      <div class="node jade">Outcome</div>
+    </div>
+    <div class="foot-num">04</div>
+  </section>
+
+  <!-- ══ 05 CHIPS ═════════════════════════════════════════ -->
+  <section class="paper" data-screen-label="05 Chips">
+    <div class="tmpl">Chips</div>
+    <div class="frame">
+      <div class="caption" style="position:absolute;left:0;top:30px;letter-spacing:.18em;text-transform:uppercase;color:var(--color-mute)">Category label</div>
+      <div class="headline" style="position:absolute;left:0;top:120px;max-width:1500px">Key items displayed in a scannable row.</div>
+      <div class="chips" style="position:absolute;left:0;top:360px">
+        <div class="chip"><span class="chip-k">Item One</span> <span class="chip-v">· detail</span></div>
+        <div class="chip"><span class="chip-k">Item Two</span> <span class="chip-v">· detail</span></div>
+        <div class="chip"><span class="chip-k">Item Three</span> <span class="chip-v">· detail</span></div>
+      </div>
+      <div class="subhead" style="position:absolute;left:0;top:600px;max-width:1450px">One observation that follows from the items above.</div>
+    </div>
+    <div class="foot-num">05</div>
+  </section>
+
+  <!-- ══ 06 ATTR LIST ══════════════════════════════════════ -->
+  <section class="paper" data-screen-label="06 Attr List">
+    <div class="tmpl">Attr List</div>
+    <div class="frame">
+      <div class="headline" style="position:absolute;left:0;top:0">What kind of thing is it?</div>
+      <div class="attrs" style="position:absolute;left:0;top:290px;max-width:1560px">
+        <div class="attr"><b>Property One</b> — brief, precise definition in plain English</div>
+        <div class="attr"><b class="jade">Property Two</b> — the defining advantage goes here, in jade</div>
+        <div class="attr"><b>Property Three</b> — keep each row to one clear thought</div>
+        <div class="attr"><b>Property Four</b> — three to four items is the ideal range</div>
+      </div>
+    </div>
+    <div class="foot-num">06</div>
+  </section>
+
+  <!-- ══ 07 MOMENT ════════════════════════════════════════ -->
+  <section class="paper" data-screen-label="07 Moment">
+    <div class="tmpl">Moment</div>
+    <div class="frame" style="display:flex;flex-direction:column;justify-content:center">
+      <div class="caption" style="letter-spacing:.18em;text-transform:uppercase;color:var(--color-mute);margin-bottom:48px">The core question</div>
+      <div style="font-size:140px;font-weight:700;letter-spacing:-0.04em;line-height:1.05;font-family:var(--font-sans)">Who decides, or<br><span class="jade">who benefits?</span></div>
+    </div>
+    <div class="foot-num">07</div>
+  </section>
+
+</deck-stage>
+<script src="../deck-stage.js"></script>
+</body>
+</html>

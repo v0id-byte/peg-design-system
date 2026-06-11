@@ -1,0 +1,37 @@
+<!-- @dsCard group="Colors" viewport="700x220" subtitle="Semantic fg/bg aliases + border values" name="Semantic Tokens" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper);padding:28px 32px;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px}
+  .row{display:flex;align-items:center;gap:14px;padding:6px 0;border-bottom:1px solid rgba(22,24,29,.06)}
+  .dot{width:28px;height:28px;border-radius:var(--radius-sm);flex-shrink:0}
+  .dot--ring{border:1.5px solid rgba(22,24,29,.25)}
+  .info{display:flex;flex-direction:column;gap:2px}
+  .token{font-size:11px;font-weight:600;color:var(--color-ink);font-family:"SF Mono","Fira Mono",monospace}
+  .role{font-size:10px;color:var(--color-mute)}
+  .border-row{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .line{height:2px;width:80px}
+  .blabel{font-size:11px;color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace}
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="row"><div class="dot dot--ring" style="background:var(--bg-default)"></div><div class="info"><span class="token">--bg-default</span><span class="role">page background</span></div></div>
+  <div class="row"><div class="dot" style="background:var(--fg-default)"></div><div class="info"><span class="token">--fg-default</span><span class="role">primary text</span></div></div>
+  <div class="row"><div class="dot" style="background:var(--bg-inverse)"></div><div class="info"><span class="token">--bg-inverse</span><span class="role">stage / outer chrome</span></div></div>
+  <div class="row"><div class="dot" style="background:var(--fg-muted)"></div><div class="info"><span class="token">--fg-muted</span><span class="role">secondary text</span></div></div>
+  <div class="row"><div class="dot" style="background:var(--fg-accent)"></div><div class="info"><span class="token">--fg-accent</span><span class="role">jade emphasis</span></div></div>
+  <div class="row"><div class="dot" style="background:var(--fg-danger)"></div><div class="info"><span class="token">--fg-danger</span><span class="role">alert / depeg</span></div></div>
+</div>
+<div class="border-row">
+  <div class="line" style="background:var(--border-default)"></div><span class="blabel">--border-default 0.34</span>
+  <div class="line" style="background:var(--border-subtle)"></div><span class="blabel">--border-subtle 0.22</span>
+  <div class="line" style="background:var(--border-chip)"></div><span class="blabel">--border-chip 0.16</span>
+</div>
+</body>
+</html>

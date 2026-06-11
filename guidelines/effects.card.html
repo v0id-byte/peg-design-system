@@ -1,0 +1,53 @@
+<!-- @dsCard group="Spacing" viewport="700x220" subtitle="Lines, radii & motion tokens" name="Effects & Motion" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper);padding:28px 32px;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  h4{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:12px}
+  .section{margin-bottom:20px}
+  .lines{display:flex;flex-direction:column;gap:10px}
+  .line-row{display:flex;align-items:center;gap:16px}
+  .line{height:2px;width:120px;flex-shrink:0}
+  .lbl{font-size:11px;color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace}
+  .radii{display:flex;gap:20px;align-items:center}
+  .rad{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .rbox{width:40px;height:40px;border:2px solid var(--color-ink)}
+  .rlbl{font-size:10px;color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace;text-align:center}
+  .motion{display:flex;gap:28px;flex-wrap:wrap}
+  .mt{font-size:11px;line-height:1.5;color:var(--color-ink)}
+  .mt code{font-family:"SF Mono","Fira Mono",monospace;font-size:10px;color:var(--color-mute)}
+</style>
+</head>
+<body>
+<div style="display:flex;gap:48px">
+  <div class="section">
+    <h4>Dividers</h4>
+    <div class="lines">
+      <div class="line-row"><div class="line" style="background:var(--color-ink)"></div><span class="lbl">--line-color (full)</span></div>
+      <div class="line-row"><div class="line" style="background:var(--line-color-faint)"></div><span class="lbl">--line-color-faint 0.22</span></div>
+      <div class="line-row"><div class="line" style="background:var(--line-color-chip)"></div><span class="lbl">--line-color-chip 0.16</span></div>
+    </div>
+  </div>
+  <div class="section">
+    <h4>Radii</h4>
+    <div class="radii">
+      <div class="rad"><div class="rbox" style="border-radius:var(--radius-none)"></div><div class="rlbl">none<br>0</div></div>
+      <div class="rad"><div class="rbox" style="border-radius:var(--radius-sm)"></div><div class="rlbl">sm<br>4px</div></div>
+      <div class="rad"><div class="rbox" style="border-radius:var(--radius-md)"></div><div class="rlbl">md<br>8px</div></div>
+      <div class="rad"><div class="rbox" style="border-radius:var(--radius-pill);width:80px"></div><div class="rlbl">pill<br>999px</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <h4>Motion</h4>
+    <div class="motion">
+      <div class="mt">Fast <code>200ms</code><br>Normal <code>400ms</code><br>Slide <code>820ms</code><br>Draw <code>1400ms</code></div>
+      <div class="mt">Reveal <code>(.2,.65,.2,1)</code><br>Snap <code>(.5,0,.6,1)</code><br>Enter Y <code>22px</code></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- @dsCard group="Colors" viewport="700x230" subtitle="6 base palette values" name="Base Palette" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper);padding:32px;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
+  .row{display:flex;gap:20px}
+  .swatch{display:flex;flex-direction:column;gap:10px;flex:1}
+  .dot{height:80px;border-radius:var(--radius-sm)}
+  .meta{font-size:11px;line-height:1.5;color:var(--color-ink)}
+  .meta b{display:block;font-size:12px;font-weight:600;margin-bottom:1px}
+  .meta span{color:var(--color-mute);font-family:"SF Mono","Fira Mono",monospace;font-size:10px}
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-paper);border:1px solid rgba(22,24,29,.12)"></div>
+    <div class="meta"><b>Paper</b>#FAFAF8<br><span>--color-paper</span></div>
+  </div>
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-ink)"></div>
+    <div class="meta"><b>Ink</b>#16181D<br><span>--color-ink</span></div>
+  </div>
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-night)"></div>
+    <div class="meta"><b>Night</b>#0B0B0C<br><span>--color-night</span></div>
+  </div>
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-jade)"></div>
+    <div class="meta"><b>Jade</b>#00A878<br><span>--color-jade</span></div>
+  </div>
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-alert)"></div>
+    <div class="meta"><b>Alert</b>#E5484D<br><span>--color-alert</span></div>
+  </div>
+  <div class="swatch">
+    <div class="dot" style="background:var(--color-mute)"></div>
+    <div class="meta"><b>Mute</b>#8A8A8E<br><span>--color-mute</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+:root {
+  /* ─── Shadows ────────────────────────────────── */
+  /* This system is intentionally flat — no shadows by default.
+     Emphasis comes from scale, weight, and whitespace. */
+  --shadow-none: none;
+
+  /* ─── Dividers ──────────────────────────────── */
+  --line-weight:       2px;
+  --line-color:        var(--color-ink);
+  --line-color-faint:  rgba(22, 24, 29, 0.22);
+  --line-color-chip:   rgba(22, 24, 29, 0.16);
+
+  /* ─── Peg dot ───────────────────────────────── */
+  --peg-dot-size:   10px;
+  --peg-dot-color:  var(--color-jade);
+
+  /* ─── Motion ────────────────────────────────── */
+  --ease-reveal:   cubic-bezier(0.2, 0.65, 0.2, 1);
+  --ease-snap:     cubic-bezier(0.5, 0.0, 0.6, 1);
+
+  --dur-fast:   200ms;
+  --dur-normal: 400ms;
+  --dur-slide:  820ms;
+  --dur-draw:  1400ms;
+
+  /* Entrance offset — elements rise this far from their rest position */
+  --enter-y: 22px;
+}

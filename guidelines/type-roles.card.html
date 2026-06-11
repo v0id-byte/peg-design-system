@@ -1,0 +1,31 @@
+<!-- @dsCard group="Type" viewport="700x175" subtitle="Semantic roles and usage context" name="Type Roles" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:var(--font);padding:18px 24px;-webkit-font-smoothing:antialiased;}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 16px;}
+  .item{border-top:1.5px solid rgba(22,24,29,.1);padding-top:8px;}
+  .role{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);margin-bottom:3px;}
+  .desc{font-size:11px;color:var(--mute);line-height:1.4;}
+  .jade{color:var(--jade);}
+  .alert{color:var(--alert);}
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="item"><div class="role">Wordmark</div><div class="desc">Slide title; 700w; huge negative tracking</div></div>
+  <div class="item"><div class="role">Hero</div><div class="desc">Single stat or big claim; tabular numerals</div></div>
+  <div class="item"><div class="role">Headline</div><div class="desc">Slide question or statement; text-wrap:balance</div></div>
+  <div class="item"><div class="role">Subhead</div><div class="desc">Secondary claim, flow text, key answer</div></div>
+  <div class="item"><div class="role">Support</div><div class="desc">Body copy, attribute lists, 400w</div></div>
+  <div class="item"><div class="role">Caption</div><div class="desc">Footnotes, slide number, sources; <span class="jade">mute</span> color</div></div>
+  <div class="item"><div class="role jade">Jade span</div><div class="desc">Inline emphasis inside any heading; used sparingly</div></div>
+  <div class="item"><div class="role alert">Alert span</div><div class="desc">Depegs, failures, risks — only when meaning is danger</div></div>
+  <div class="item"><div class="role" style="letter-spacing:.18em;font-size:9px;">ALL CAPS LABEL</div><div class="desc">Category intro; 0.18em tracking; mute color</div></div>
+</div>
+</body>
+</html>

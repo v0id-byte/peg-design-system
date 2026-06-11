@@ -1,0 +1,127 @@
+<!-- @dsCard group="Components" viewport="700x570" name="Core Components" subtitle="PegLine · FlowBand · Chip · StatBlock · AttrList" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--color-paper,#FAFAF8);font-family:var(--font-sans,'Inter',system-ui);-webkit-font-smoothing:antialiased}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { Fragment } = React;
+
+function PegLine({ label = '$1.00', faint = false, showDot = true, showLabel = true }) {
+  return (
+    <div style={{ position: 'relative', height: '2px', width: '100%' }}>
+      <div style={{ position: 'absolute', inset: 0, background: faint ? 'rgba(22,24,29,0.22)' : 'var(--color-ink,#16181D)' }} />
+      {showLabel && <span style={{ position: 'absolute', right: showDot ? '28px' : 0, top: '-24px', fontSize: '11px', color: 'var(--color-mute,#8A8A8E)', fontVariantNumeric: 'tabular-nums', letterSpacing: '.02em', whiteSpace: 'nowrap' }}>{label}</span>}
+      {showDot && <div style={{ position: 'absolute', right: '-5px', top: '-4px', width: '10px', height: '10px', borderRadius: '50%', background: 'var(--color-jade,#00A878)' }} />}
+    </div>
+  );
+}
+
+function FlowBand({ nodes = [], accentIndices = [] }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+      {nodes.map((node, i) => (
+        <Fragment key={i}>
+          <div style={{ flexShrink: 0, fontSize: '17px', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.05, whiteSpace: 'nowrap', color: accentIndices.includes(i) ? 'var(--color-jade,#00A878)' : 'var(--color-ink,#16181D)' }}>{node}</div>
+          {i < nodes.length - 1 && (
+            <div style={{ flex: '1 1 0', height: '2px', background: 'rgba(22,24,29,0.22)', position: 'relative', margin: '0 16px' }}>
+              <div style={{ position: 'absolute', right: '-1px', top: '50%', transform: 'translateY(-50%)', borderLeft: '8px solid rgba(22,24,29,0.34)', borderTop: '5px solid transparent', borderBottom: '5px solid transparent' }} />
+            </div>
+          )}
+        </Fragment>
+      ))}
+    </div>
+  );
+}
+
+function Chip({ label, value, size = 'md' }) {
+  const s = { sm: { p: '6px 14px', fz: '12px' }, md: { p: '10px 20px', fz: '15px' }, lg: { p: '14px 28px', fz: '20px' } }[size];
+  return (
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', border: '2px solid rgba(22,24,29,0.16)', borderRadius: '999px', padding: s.p, fontSize: s.fz, fontWeight: 600, letterSpacing: '-0.01em', whiteSpace: 'nowrap', lineHeight: 1 }}>
+      <span style={{ color: 'var(--color-ink,#16181D)' }}>{label}</span>
+      {value !== undefined && <span style={{ color: 'var(--color-mute,#8A8A8E)', fontWeight: 500 }}> · {value}</span>}
+    </div>
+  );
+}
+
+function StatBlock({ value, label, accent = false, danger = false }) {
+  const color = danger ? 'var(--color-alert,#E5484D)' : accent ? 'var(--color-jade,#00A878)' : 'var(--color-ink,#16181D)';
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+      <div style={{ fontSize: '38px', fontWeight: 700, letterSpacing: '-0.03em', lineHeight: 1, fontVariantNumeric: 'tabular-nums', color }}>{value}</div>
+      <div style={{ fontSize: '11px', color: 'var(--color-mute,#8A8A8E)', lineHeight: 1.4 }}>{label}</div>
+    </div>
+  );
+}
+
+function AttrList({ items = [] }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      {items.map((item, i) => (
+        <div key={i} style={{ fontSize: '13px', fontWeight: 400, lineHeight: 1.4, letterSpacing: '-0.01em', color: 'var(--color-mute,#8A8A8E)' }}>
+          <strong style={{ fontWeight: 600, color: item.accent ? 'var(--color-jade,#00A878)' : 'var(--color-ink,#16181D)' }}>{item.term}</strong>
+          {item.definition ? ` — ${item.definition}` : ''}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const Label = ({ c }) => <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--color-mute,#8A8A8E)', marginBottom: '12px' }}>{c}</div>;
+const Hr = () => <div style={{ borderTop: '1px solid rgba(22,24,29,0.08)', margin: '20px 0' }} />;
+
+function App() {
+  return (
+    <div style={{ background: 'var(--color-paper,#FAFAF8)', padding: '28px 32px' }}>
+      <Label c="PegLine" />
+      <div style={{ paddingTop: '28px', marginBottom: '14px' }}><PegLine /></div>
+      <PegLine faint showLabel={false} />
+
+      <Hr />
+      <Label c="FlowBand" />
+      <FlowBand nodes={['Your $', 'US Treasuries', 'Interest']} accentIndices={[2]} />
+
+      <Hr />
+      <Label c="Chip" />
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', alignItems: 'center' }}>
+        <Chip label="US" value="Jul 2025" size="sm" />
+        <Chip label="Hong Kong" value="Aug 2025" />
+        <Chip label="EU" value="MiCA" />
+        <Chip label="No value" />
+        <Chip label="Large" value="item" size="lg" />
+      </div>
+
+      <Hr />
+      <Label c="StatBlock" />
+      <div style={{ display: 'flex', gap: '36px', flexWrap: 'wrap' }}>
+        <StatBlock value="$306B" label="total market cap, end of 2025" />
+        <StatBlock value="84%" label="USDT + USDC market share" accent />
+        <StatBlock value="$40B" label="wiped out, UST collapse 2022" danger />
+      </div>
+
+      <Hr />
+      <Label c="AttrList" />
+      <AttrList items={[
+        { term: 'Stable by design', definition: 'pegged to $1' },
+        { term: 'Fully backed', definition: 'a redeemable claim on reserves', accent: true },
+        { term: 'Earns the issuer, not you', definition: 'pays no interest to holders' },
+        { term: 'Spends like cash, 24/7', definition: 'but no legal tender or deposit insurance' },
+      ]} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

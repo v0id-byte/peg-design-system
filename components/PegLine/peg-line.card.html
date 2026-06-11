@@ -1,0 +1,32 @@
+<!-- @dsCard group="Components" viewport="700x100" subtitle="Default & faint variants" name="PegLine" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:var(--font);padding:20px 28px;-webkit-font-smoothing:antialiased;}
+  .label{font-size:9.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:12px;}
+  .peg{position:relative;height:2px;margin-bottom:4px;}
+  .peg::before{content:"";position:absolute;left:0;right:0;top:0;border-top:2px solid var(--ink);}
+  .peg.faint::before{border-top-color:rgba(22,24,29,.22);}
+  .peg .dot{position:absolute;right:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--jade);}
+  .peg .lbl{position:absolute;right:18px;top:-22px;font-size:11px;color:var(--mute);font-variant-numeric:tabular-nums;letter-spacing:.02em;}
+  .pair{display:flex;gap:32px;}
+  .col{flex:1;}
+</style>
+</head>
+<body>
+<div class="pair">
+  <div class="col">
+    <div class="label">Default</div>
+    <div class="peg"><span class="lbl">$1.00</span><span class="dot"></span></div>
+  </div>
+  <div class="col">
+    <div class="label">Faint</div>
+    <div class="peg faint"></div>
+  </div>
+</div>
+</body>
+</html>
