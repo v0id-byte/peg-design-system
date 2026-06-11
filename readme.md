@@ -1,6 +1,8 @@
 # Peg Design System — Minimal Slide & Presentation Framework
 
-> A type-led, data-first design system for slide decks, web presentations, and React UI components. Built on restraint: one background, one accent, no shadows.
+> 一套从「明天就要交」的经济学 presentation 里逼出来的设计系统。喜欢 Keynote 的动效质感，但手工做太慢——所以把整套视觉语言封装成了 Claude Skill，让 AI 直接生成同款幻灯片。支持导入 Claude Design。
+
+> A minimal, type-led design system born from a deadline: loved Keynote's animation quality but handcrafting every slide took too long. Packaged the whole visual language as a Claude Skill so AI can generate matching slides directly. Compatible with Claude Design import.
 
 **[English](#english) · [中文](#中文)**
 
@@ -24,7 +26,9 @@
 
 ### What is Peg?
 
-**Peg** is an open-source design system and slide framework extracted from a production presentation deck. It gives you a complete, opinionated visual language for building beautiful, readable presentations in HTML/CSS and React — without touching a design tool.
+Loved Keynote's animation quality but handcrafting every slide was too slow — an economics presentation was due the next day and there was no time. So the whole visual language got packaged into a Claude Skill (`SKILL.md`): AI generates matching slides on demand, same aesthetic, minutes not hours. Also importable directly into **Claude Design**.
+
+**Peg** is the open-source design system extracted from that deadline project — a complete visual language with HTML/CSS/React implementation, no design tools required.
 
 Key characteristics:
 - **Minimal palette** — 6 tokens, one warm-white background, one jade accent
@@ -167,7 +171,9 @@ MIT — use freely in commercial and personal projects.
 
 ### Peg 是什么？
 
-**Peg** 是一套开源设计系统与幻灯片框架，从一套生产级演示文稿中提炼而来。它为你提供完整、有主张的视觉语言，让你用 HTML/CSS 和 React 构建美观、可读性强的演示文稿——无需打开任何设计工具。
+喜欢 Keynote 那种动效质感，但手工调每一张幻灯片实在太耗时——经济课 presentation 隔天就要交，来不及慢慢做了。于是把整套视觉语言封装成了一个 Claude Skill（`SKILL.md`），让 AI 直接按这套规范生成幻灯片，同款设计几分钟出稿。也可以直接导入 **Claude Design** 使用。
+
+**Peg** 是从这次作业里提炼出来的开源设计系统，完整的视觉语言规范 + HTML/CSS/React 实现，不需要打开任何设计工具。
 
 核心特点：
 - **极简配色** — 6 个色彩 token，一种暖白背景，一种翠绿强调色
