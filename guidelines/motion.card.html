@@ -1,4 +1,4 @@
-<!-- @dsCard group="Brand" viewport="700x148" subtitle="Entrance build system — delays & easing" name="Motion Builds" -->
+<!-- @dsCard group="Brand" viewport="700x188" subtitle="Entrance build system — delays, easing & data bars" name="Motion Builds" -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +10,15 @@
   .row{display:flex;gap:10px;margin-bottom:8px;align-items:center;}
   .chip{background:rgba(22,24,29,.06);border-radius:4px;padding:3px 8px;font-size:11px;font-weight:700;color:var(--ink);font-family:monospace;white-space:nowrap;}
   .bar-wrap{flex:1;position:relative;height:6px;background:rgba(22,24,29,.07);border-radius:3px;}
-  .bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--jade);border-radius:3px;}
+  .bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--jade);border-radius:3px;animation:growX 1100ms 120ms cubic-bezier(.2,.65,.2,1) backwards;}
   .ms{font-size:10.5px;color:var(--mute);font-variant-numeric:tabular-nums;min-width:42px;text-align:right;}
   .divider{border:none;border-top:1px solid rgba(22,24,29,.08);margin:10px 0;}
+  .chart{height:38px;display:flex;align-items:flex-end;gap:9px;margin-bottom:9px;}
+  .col{width:16px;background:var(--ink);border-radius:3px 3px 0 0;animation:growY 1100ms 120ms cubic-bezier(.2,.65,.2,1) backwards;}
   .note{font-size:10px;color:var(--mute);line-height:1.5;}
   .note code{font-size:9.5px;background:rgba(22,24,29,.06);border-radius:3px;padding:1px 4px;color:var(--ink);}
+  @keyframes growX{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes growY{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
 </style>
 </head>
 <body>
@@ -24,6 +28,7 @@
   <div class="row"><span class="chip">.d4</span><div class="bar-wrap"><div class="bar-fill" style="width:79%;"></div></div><span class="ms">440 ms</span></div>
   <div class="row"><span class="chip">.d5</span><div class="bar-wrap"><div class="bar-fill" style="width:100%;"></div></div><span class="ms">560 ms</span></div>
   <hr class="divider">
-  <div class="note">Duration <strong>820 ms</strong> · <code>cubic-bezier(.2,.65,.2,1)</code> · <code>translateY 22px→0</code> + opacity · resting DOM = end state (no blank exports)</div>
+  <div class="chart"><div class="col" style="height:18px"></div><div class="col" style="height:30px"></div><div class="col" style="height:38px;background:var(--jade)"></div><div class="col" style="height:24px"></div></div>
+  <div class="note">Data bars grow on slide entry: <code>data-peg-bar</code> / <code>.bar-fill</code> / <code>.progress-fill</code>, vertical via <code>data-peg-bar="vertical"</code>. Duration <strong>1100 ms</strong> · <code>cubic-bezier(.2,.65,.2,1)</code> · resting DOM = final value.</div>
 </body>
 </html>

@@ -155,6 +155,96 @@ assets/                 Inter variable font
 
 ---
 
+### Motion & Animation
+
+Peg includes a built-in animation engine (`peg-animate.js`) for Keynote-like entrance effects and slide transitions.
+
+#### Motion Tokens (in `tokens/effects.css`)
+
+| Token | Value | Purpose |
+|---|---|---|
+| `--ease-reveal` | `cubic-bezier(0.2, 0.65, 0.2, 1)` | Standard entrance easing |
+| `--ease-out-expo` | `cubic-bezier(0.16, 1, 0.3, 1)` | Fast deceleration, snappy entries |
+| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Overshoot spring, for hero numbers |
+| `--ease-in-out` | `cubic-bezier(0.65, 0, 0.35, 1)` | Symmetric, for slide transitions |
+| `--dur-fast` | `200ms` | Quick micro-interactions |
+| `--dur-normal` | `400ms` | Standard UI transitions |
+| `--dur-slow` | `820ms` | Default build animation duration |
+| `--dur-draw` | `1400ms` | SVG path drawing (e.g., depeg chart) |
+| `--dur-page` | `500ms` | Slide transition duration |
+
+#### Build Animations (Entrance Effects)
+
+Add `data-peg-animate` to any element inside a slide:
+
+| Type | Keyframes | Best For |
+|---|---|---|
+| `fade-up` | `opacity 0→1, translateY(22px)→0` | Default for text, containers |
+| `scale-in` | `opacity 0→1, scale(0.8)→1` | Hero numbers, wordmarks |
+| `blur-in` | `opacity 0→1, filter blur(8px)→0` | Background elements |
+| `reveal-right` | `opacity 0→1, translateX(30px)→0` | Flow nodes, list items |
+
+**Delays:** Use `data-peg-delay="80"` (ms) for individual timing.  
+**Stagger:** Add `data-peg-stagger="100"` to a parent for automatic sibling delays.
+
+```html
+<div class="headline" data-peg-animate="fade-up" data-peg-delay="80">Title</div>
+<div class="hero" data-peg-animate="scale-in" data-peg-delay="200">$306B</div>
+<div class="chips" data-peg-stagger="100">
+  <div class="chip" data-peg-animate="fade-up">Item 1</div>
+  <div class="chip" data-peg-animate="fade-up">Item 2</div>
+</div>
+```
+
+**Backward compatible:** `.build.d1` through `.build.d5` classes still work (mapped to `fade-up` with 80/200/320/440/560ms delays).
+
+#### Count-Up Numbers
+
+Add `data-peg-count` or use `.count` class with data attributes:
+
+```html
+<div class="stat-n count" data-to="306" data-pre="$" data-suf="B" data-cdelay="360">$306B</div>
+```
+
+#### Data Bars
+
+Add `data-peg-bar` to bars or use `.bar-fill` / `.progress-fill`. Horizontal bars grow left-to-right; vertical bars grow bottom-to-top.
+
+```html
+<div class="bar-fill" style="width:72%;"></div>
+<div data-peg-bar="vertical" style="height:180px;"></div>
+```
+
+Use `data-peg-bar-duration`, `data-peg-bar-delay`, and `data-peg-bar-easing` for local timing overrides. The resting DOM remains the final value for screenshots, PDF, and PPTX export.
+
+#### Slide Transitions
+
+Add `data-peg-transition` to `<section>` (slide) elements:
+
+| Value | Effect |
+|---|---|
+| `dissolve` | Crossfade (old fades out, new fades in) |
+| `push-left` | New slides in from right, old slides out left |
+| `none` | Instant cut (default) |
+
+```html
+<section class="paper" data-label="Title" data-peg-transition="dissolve">...</section>
+```
+
+Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is set on `<deck-stage>`.
+
+#### Initialization
+
+```html
+<script src="deck-stage.js"></script>
+<script src="peg-animate.js"></script>
+<script>
+  PegAnimate.init('deck-stage');
+</script>
+```
+
+---
+
 ### License
 
 MIT — use freely in commercial and personal projects.
@@ -269,6 +359,19 @@ tokens/
   </div>
 </div>
 ```
+
+---
+
+### 动效补充
+
+数据柱、横条、进度条可加 `data-peg-bar`，或直接使用 `.bar-fill` / `.progress-fill`。横向默认从左到右增长；竖向使用 `data-peg-bar="vertical"`，从底部向上增长。
+
+```html
+<div class="bar-fill" style="width:72%;"></div>
+<div data-peg-bar="vertical" style="height:180px;"></div>
+```
+
+可用 `data-peg-bar-duration`、`data-peg-bar-delay`、`data-peg-bar-easing` 单独调整时长、延迟和曲线。DOM 保持最终数值，截图、PDF、PPTX 导出不显示半成品。
 
 ---
 
