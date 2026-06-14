@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letter Spring Demo</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="slides/slide-base.css">
+<style>
+  deck-stage:not(:defined) { visibility: hidden; }
+  .moment-frame {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    text-align: center;
+  }
+  .moment-title {
+    font-size: 132px;
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.045em;
+    line-height: 0.96;
+  }
+  .moment-note {
+    position: absolute;
+    left: var(--slide-margin);
+    bottom: var(--slide-foot-b);
+    font-size: var(--fz-caption);
+    color: var(--fg-muted);
+    letter-spacing: 0;
+  }
+  .replay {
+    position: absolute;
+    right: var(--slide-margin);
+    bottom: var(--slide-foot-b);
+    border: 1px solid var(--border-chip);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-ink);
+    font: 500 24px/1 var(--font-sans);
+    padding: 16px 28px;
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+  <section class="paper" data-label="Letter spring demo">
+    <div class="moment-frame">
+      <h1 class="moment-title" data-peg-animate="letter-spring" data-peg-letter-stagger="36">A one-line moment.</h1>
+      <p class="moment-note">Press →, then ← to replay the entrance.</p>
+      <button class="replay" type="button">Replay</button>
+    </div>
+  </section>
+  <section class="paper" data-label="Chinese demo">
+    <div class="moment-frame">
+      <h1 class="moment-title" data-peg-animate="letter-spring" data-peg-letter-stagger="48">从稳定开始</h1>
+      <p class="moment-note">Works with Chinese characters too.</p>
+      <button class="replay" type="button">Replay</button>
+    </div>
+  </section>
+</deck-stage>
+<script src="deck-stage.js"></script>
+<script src="peg-animate.js"></script>
+<script>
+  const deck = document.querySelector('deck-stage');
+  PegAnimate.init(deck);
+  document.querySelectorAll('.replay').forEach((button) => {
+    button.addEventListener('click', () => {
+      const slide = button.closest('section');
+      PegAnimate.play(slide, Array.from(deck.children).indexOf(slide));
+    });
+  });
+</script>
+</body>
+</html>

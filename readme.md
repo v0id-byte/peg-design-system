@@ -183,18 +183,23 @@ Add `data-peg-animate` to any element inside a slide:
 | `scale-in` | `opacity 0→1, scale(0.8)→1` | Hero numbers, wordmarks |
 | `blur-in` | `opacity 0→1, filter blur(8px)→0` | Background elements |
 | `reveal-right` | `opacity 0→1, translateX(30px)→0` | Flow nodes, list items |
+| `letter-spring` | each character `opacity 0→1, translateY(0.72em)→0` with spring overshoot | One-line title or moment slides |
 
-**Delays:** Use `data-peg-delay="80"` (ms) for individual timing.  
-**Stagger:** Add `data-peg-stagger="100"` to a parent for automatic sibling delays.
+**Delays:** Use `data-peg-delay="80"` (ms) for individual timing.<br>
+**Stagger:** Add `data-peg-stagger="100"` to a parent for automatic sibling delays.<br>
+**Letter stagger:** Use `data-peg-letter-stagger="34"` (ms) for per-character timing.
 
 ```html
 <div class="headline" data-peg-animate="fade-up" data-peg-delay="80">Title</div>
 <div class="hero" data-peg-animate="scale-in" data-peg-delay="200">$306B</div>
+<div class="headline" data-peg-animate="letter-spring">A one-line moment.</div>
 <div class="chips" data-peg-stagger="100">
   <div class="chip" data-peg-animate="fade-up">Item 1</div>
   <div class="chip" data-peg-animate="fade-up">Item 2</div>
 </div>
 ```
+
+Open `letter-spring-demo.html` to preview the per-character title reveal.
 
 **Backward compatible:** `.build.d1` through `.build.d5` classes still work (mapped to `fade-up` with 80/200/320/440/560ms delays).
 
@@ -363,6 +368,14 @@ tokens/
 ---
 
 ### 动效补充
+
+大标题页的一行字可用 `data-peg-animate="letter-spring"`，每个字母/汉字会从下方逐个弹性甩入并渐现，适合 Keynote 风格的 moment slide。用 `data-peg-letter-stagger="34"` 调整逐字间隔。
+
+```html
+<div class="headline" data-peg-animate="letter-spring">A one-line moment.</div>
+```
+
+打开 `letter-spring-demo.html` 可预览逐字标题动效。
 
 数据柱、横条、进度条可加 `data-peg-bar`，或直接使用 `.bar-fill` / `.progress-fill`。横向默认从左到右增长；竖向使用 `data-peg-bar="vertical"`，从底部向上增长。
 

@@ -29,11 +29,24 @@
         if (slide) this.play(slide, index);
       });
 
-      // Handle initial slide if already active
-      const activeSlide = deck.querySelector('[data-deck-active]');
-      if (activeSlide) {
+      const playActive = () => {
+        const activeSlide = deck.querySelector('[data-deck-active]');
+        if (!activeSlide) return false;
         const idx = Array.from(deck.children).indexOf(activeSlide);
         this.play(activeSlide, idx);
+        return true;
+      };
+
+      const playWhenReady = () => requestAnimationFrame(playActive);
+      if (deck.hasAttribute('data-fonts-pending')) {
+        const observer = new MutationObserver(() => {
+          if (deck.hasAttribute('data-fonts-pending')) return;
+          observer.disconnect();
+          playWhenReady();
+        });
+        observer.observe(deck, { attributes: true, attributeFilter: ['data-fonts-pending'] });
+      } else {
+        playWhenReady();
       }
     },
 
@@ -93,7 +106,11 @@
         if (idx >= 0) delay += parseInt(stagger, 10) * idx;
       }
 
-      // Keyframes based on type
+      if (type === 'letter-spring') {
+        this._animateLetters(el, delay);
+        return;
+      }
+
       const keyframes = this._keyframesForType(type);
       if (!keyframes) return;
 
@@ -111,6 +128,33 @@
       if (el.classList.contains('d4')) return 440;
       if (el.classList.contains('d5')) return 560;
       return 0;
+    },
+
+    _animateLetters(el, delay) {
+      if (!el.dataset.pegLettersReady) {
+        const text = el.textContent;
+        el.dataset.pegLettersText = text;
+        el.textContent = '';
+        Array.from(text).forEach((char) => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.style.display = 'inline-block';
+          span.style.whiteSpace = 'pre';
+          el.appendChild(span);
+        });
+        el.dataset.pegLettersReady = 'true';
+      }
+
+      const duration = parseInt(el.getAttribute('data-peg-duration'), 10) || 720;
+      const stagger = parseInt(el.getAttribute('data-peg-letter-stagger'), 10) || 34;
+      const easing = el.getAttribute('data-peg-easing') || 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+      Array.from(el.children).forEach((span, index) => {
+        span.animate([
+          { opacity: 0, transform: 'translateY(0.72em) rotate(3deg)' },
+          { opacity: 1, transform: 'none' }
+        ], { duration, delay: delay + index * stagger, easing, fill: 'backwards' });
+      });
     },
 
     /** Return keyframes for animation type */

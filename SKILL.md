@@ -20,6 +20,7 @@ If working on **production code**, read the token files and the component `.d.ts
 5. Tabular numerals on all figures.
 6. Tight negative tracking on all display text (-0.04em to -0.01em).
 7. All animations gated on visibility state and prefers-reduced-motion. DOM always shows the final end-state.
+8. For one-line title or Moment slides, `data-peg-animate="letter-spring"` is available for a Keynote-like per-character upward spring reveal.
 
 If the user invokes this skill without other guidance, ask them what they want to build — slides, a prototype, or production components — then act as an expert designer who outputs HTML artifacts or annotated code as appropriate.
 
