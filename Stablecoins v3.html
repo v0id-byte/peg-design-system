@@ -35,6 +35,11 @@
     --peg-x0:154px;
     --peg-x1:1766px;
     --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Inter,system-ui,sans-serif;
+    /* Motion tokens */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-page:      500ms;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;background:#000;}
@@ -97,21 +102,21 @@
 <deck-stage width="1920" height="1080" no-rail>
 
   <!-- ════════════════════ SLIDE 01 · Title ════════════════════ -->
-  <section class="paper" data-label="Title">
+  <section class="paper" data-label="Title" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="subhead mute build d1" style="position:absolute;left:2px;top:110px;font-weight:500;font-size:var(--fz-support);">The $1 tokens that suddenly matter to the whole world.</div>
-      <div class="wordmark build d2" style="position:absolute;left:0;top:250px;">Stablecoins</div>
+      <div class="subhead mute" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:2px;top:110px;font-weight:500;font-size:var(--fz-support);">The $1 tokens that suddenly matter to the whole world.</div>
+      <div class="wordmark" data-peg-animate="scale-in" data-peg-delay="200" style="position:absolute;left:0;top:250px;">Stablecoins</div>
     </div>
-    <div class="peg build d3"><span class="peg-label" style="left:auto;right:44px;">$1.00</span><span class="peg-dot"></span></div>
-    <div class="caption build d4" style="position:absolute;left:var(--margin);bottom:120px;">Presenter A &amp; Presenter B&nbsp;&nbsp;·&nbsp;&nbsp;AP Economics&nbsp;&nbsp;·&nbsp;&nbsp;June 2026</div>
+    <div class="peg" data-peg-animate="fade-up" data-peg-delay="320"><span class="peg-label" style="left:auto;right:44px;">$1.00</span><span class="peg-dot"></span></div>
+    <div class="caption" data-peg-animate="fade-up" data-peg-delay="440" style="position:absolute;left:var(--margin);bottom:120px;">Presenter A &amp; Presenter B&nbsp;&nbsp;·&nbsp;&nbsp;AP Economics&nbsp;&nbsp;·&nbsp;&nbsp;June 2026</div>
     <div class="foot-num">01</div>
   </section>
 
   <!-- ════════════════════ SLIDE 02 · Hook ════════════════════ -->
-  <section class="paper" data-label="The hook">
+  <section class="paper" data-label="The hook" data-peg-transition="dissolve">
     <div class="frame" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;">
-      <div class="headline build d1" style="max-width:1500px;"><span class="jade">2025:</span> the year everyone rushed in.</div>
-      <div class="caption build d3" style="margin-top:80px;letter-spacing:0.18em;text-transform:uppercase;font-size:24px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="max-width:1500px;"><span class="jade">2025:</span> the year everyone rushed in.</div>
+      <div class="caption" data-peg-animate="fade-up" data-peg-delay="320" style="margin-top:80px;letter-spacing:0.18em;text-transform:uppercase;font-size:24px;">
         US&nbsp;&nbsp;·&nbsp;&nbsp;Hong&nbsp;Kong&nbsp;&nbsp;·&nbsp;&nbsp;EU&nbsp;&nbsp;·&nbsp;&nbsp;UK&nbsp;&nbsp;·&nbsp;&nbsp;Singapore&nbsp;&nbsp;·&nbsp;&nbsp;Korea
       </div>
     </div>
@@ -120,13 +125,13 @@
   </section>
 
   <!-- ════════════════════ SLIDE 03 · What it actually is ════════════════════ -->
-  <section class="paper" data-label="What it actually is">
+  <section class="paper" data-label="What it actually is" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">A private digital dollar.</div>
-      <div class="subhead build d2" style="position:absolute;left:0;top:250px;max-width:1520px;font-weight:500;font-size:46px;line-height:1.32;color:var(--ink);">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">A private digital dollar.</div>
+      <div class="subhead" data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:250px;max-width:1520px;font-weight:500;font-size:46px;line-height:1.32;color:var(--ink);">
         A token you can always redeem for <span class="jade">$1</span> — really an IOU on the company that issued it, backed 1:1 by reserves it holds.
       </div>
-      <div class="stats build d3" style="position:absolute;left:2px;top:560px;">
+      <div class="stats" data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:2px;top:560px;">
         <div class="stat"><div class="stat-n count" data-to="84" data-suf="%" data-cdelay="360">84%</div><div class="stat-l">of the market is<br>USDT + USDC</div></div>
         <div class="stat"><div class="stat-n count" data-to="306" data-pre="$" data-suf="B" data-cdelay="360">$306B</div><div class="stat-l">total market size<br>end of 2025</div></div>
       </div>
@@ -136,10 +141,10 @@
   </section>
 
   <!-- ════════════════════ SLIDE 04 · Two types ════════════════════ -->
-  <section class="paper" data-label="Two types">
+  <section class="paper" data-label="Two types" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">Not all "stable" coins work the same way.</div>
-      <div class="build d2" style="position:absolute;left:0;top:215px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">Not all "stable" coins work the same way.</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:215px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
         <div style="border-top:3px solid var(--jade);padding-top:40px;">
           <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--jade);margin-bottom:24px;">Collateralized</div>
           <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:26px;">Backed by<br>real assets</div>
@@ -161,10 +166,10 @@
   </section>
 
   <!-- ════════════════════ SLIDE 05 · Where does it fit? ════════════════════ -->
-  <section class="paper" data-label="Where does it fit?">
+  <section class="paper" data-label="Where does it fit?" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">Where does a stablecoin fit?</div>
-      <div class="build d2" style="position:absolute;left:0;top:188px;right:0;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">Where does a stablecoin fit?</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:188px;right:0;">
         <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;padding-bottom:20px;border-bottom:2px solid var(--ink);">
           <div></div>
           <div style="font-size:40px;font-weight:600;letter-spacing:-0.015em;">Cash</div>
@@ -202,10 +207,10 @@
   </section>
 
   <!-- ════════════════════ SLIDE 06 · Financial properties ════════════════════ -->
-  <section class="paper" data-label="Financial properties">
+  <section class="paper" data-label="Financial properties" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">So what kind of money is it?</div>
-      <div class="attrs build d2" style="position:absolute;left:0;top:300px;max-width:1560px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">So what kind of money is it?</div>
+      <div class="attrs" data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:300px;max-width:1560px;">
         <div class="attr"><b>Stable by design</b> — pegged to $1</div>
         <div class="attr"><b class="k-jade">Fully backed</b> — a redeemable claim on reserves</div>
         <div class="attr"><b>Earns the issuer, not you</b> — pays no interest to holders</div>
@@ -217,43 +222,43 @@
   </section>
 
   <!-- ════════════════════ SLIDE 07 · How the peg holds ════════════════════ -->
-  <section class="paper" data-label="How the peg holds">
+  <section class="paper" data-label="How the peg holds" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">How does it stay at exactly $1?</div>
-      <div class="build d2" style="position:absolute;left:0;top:230px;display:flex;align-items:center;gap:64px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">How does it stay at exactly $1?</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:230px;display:flex;align-items:center;gap:64px;">
         <div style="font-size:120px;font-weight:700;letter-spacing:-0.04em;" class="tnum">$1</div>
         <div style="font-size:88px;color:var(--mute);font-weight:300;">⇄</div>
         <div style="font-size:120px;font-weight:700;letter-spacing:-0.04em;">1 token</div>
       </div>
-      <div class="subhead build d3" style="position:absolute;left:0;top:560px;">Held by reserves, redemption &amp; <span class="jade">arbitrage</span>.</div>
+      <div class="subhead" data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:0;top:560px;">Held by reserves, redemption &amp; <span class="jade">arbitrage</span>.</div>
     </div>
-    <div class="peg faint build d3"><span class="peg-label" style="left:auto;right:44px;">$1.00</span></div>
+    <div class="peg faint" data-peg-animate="fade-up" data-peg-delay="320"><span class="peg-label" style="left:auto;right:44px;">$1.00</span></div>
     <div class="foot-src">GENIUS Act (2025): cash or sub-93-day Treasuries only; HK Stablecoins Ordinance (2025)</div>
     <div class="foot-num">07</div>
   </section>
 
   <!-- ════════════════════ SLIDE 08 · The money machine ════════════════════ -->
-  <section class="paper" data-label="The money machine">
+  <section class="paper" data-label="The money machine" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">So how do issuers make money?</div>
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">So how do issuers make money?</div>
     </div>
-    <div class="flow build d2">
+    <div class="flow" data-peg-animate="fade-up" data-peg-delay="200">
       <div class="node">Your $</div>
       <div class="conn"></div>
       <div class="node">US Treasuries</div>
       <div class="conn"></div>
       <div class="node jade">Interest</div>
     </div>
-    <div class="support build d3" style="position:absolute;left:var(--margin);top:800px;color:var(--mute);font-size:32px;">+ a small <span style="color:var(--ink);font-weight:600;" class="tnum"><span class="count" data-to="0.1" data-dec="1" data-cdelay="420">0.1</span>–<span class="count" data-to="0.2" data-dec="1" data-cdelay="420">0.2</span>%</span> fee to mint or redeem</div>
+    <div class="support" data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:var(--margin);top:800px;color:var(--mute);font-size:32px;">+ a small <span style="color:var(--ink);font-weight:600;" class="tnum"><span class="count" data-to="0.1" data-dec="1" data-cdelay="420">0.1</span>–<span class="count" data-to="0.2" data-dec="1" data-cdelay="420">0.2</span>%</span> fee to mint or redeem</div>
     <div class="foot-src">36Kr (2025); BIS, FSI Briefs No. 27 (2025)</div>
     <div class="foot-num">08</div>
   </section>
 
   <!-- ════════════════════ SLIDE 09 · Reserve quality ════════════════════ -->
-  <section class="paper" data-label="Reserve quality">
+  <section class="paper" data-label="Reserve quality" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">"We have the reserves." — Says who?</div>
-      <div class="build d2" style="position:absolute;left:0;top:218px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">"We have the reserves." — Says who?</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:218px;right:0;display:grid;grid-template-columns:1fr 1fr;gap:100px;">
         <div style="border-top:3px solid rgba(22,24,29,0.14);padding-top:38px;">
           <div style="font-size:24px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--mute);margin-bottom:22px;">What most issuers provide</div>
           <div style="font-size:56px;font-weight:700;letter-spacing:-0.025em;line-height:1.1;margin-bottom:26px;">Attestation</div>
@@ -265,7 +270,7 @@
           <div style="font-size:33px;color:var(--mute);line-height:1.46;">An independent auditor traces every reserve asset to its real-world source and formally certifies those assets genuinely exist.</div>
         </div>
       </div>
-      <div class="build d3" style="position:absolute;left:0;top:648px;max-width:1520px;">
+      <div data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:0;top:648px;max-width:1520px;">
         <div style="font-size:38px;font-weight:500;line-height:1.36;color:var(--ink);">Stability rests on <span class="jade">trust in the proof</span> — not just the promise.</div>
         <div style="margin-top:14px;font-size:30px;color:var(--mute);">Tether's comprehensive independent audit remains pending as of 2025.</div>
       </div>
@@ -275,14 +280,14 @@
   </section>
 
   <!-- ════════════════════ SLIDE 10 · Stablecoins & US debt ════════════════════ -->
-  <section class="paper" data-label="Stablecoins & US debt">
+  <section class="paper" data-label="Stablecoins & US debt" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="caption build d1" style="position:absolute;left:0;top:30px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);">Why governments care</div>
-      <div class="headline build d2" style="position:absolute;left:0;top:120px;max-width:1500px;">
+      <div class="caption" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:30px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);">Why governments care</div>
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:120px;max-width:1500px;">
         Every dollar in becomes <span class="jade">new demand for US debt</span>.
       </div>
     </div>
-    <div class="flow build d3">
+    <div class="flow" data-peg-animate="fade-up" data-peg-delay="320">
       <div class="node">Your $</div>
       <div class="conn"></div>
       <div class="node">USDT</div>
@@ -294,15 +299,15 @@
   </section>
 
   <!-- ════════════════════ SLIDE 11 · The global race ════════════════════ -->
-  <section class="paper" data-label="The global race">
+  <section class="paper" data-label="The global race" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">Everyone wants in.</div>
-      <div class="chips build d2" style="position:absolute;left:0;top:300px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">Everyone wants in.</div>
+      <div class="chips" data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:300px;">
         <div class="chip"><span class="chip-k">GENIUS Act</span> <span class="chip-v">· Jul 2025</span></div>
         <div class="chip"><span class="chip-k">Hong Kong</span> <span class="chip-v">· Aug 2025</span></div>
         <div class="chip"><span class="chip-k">EU</span> <span class="chip-v">· MiCA</span></div>
       </div>
-      <div class="subhead build d3" style="position:absolute;left:0;top:560px;max-width:1450px;">
+      <div class="subhead" data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:0;top:560px;max-width:1450px;">
         Mainland China restricts crypto — <span class="jade">Hong Kong is the sandbox</span>.
       </div>
     </div>
@@ -311,11 +316,11 @@
   </section>
 
   <!-- ════════════════════ SLIDE 12 · The GENIUS Act ════════════════════ -->
-  <section class="paper" data-label="The GENIUS Act">
+  <section class="paper" data-label="The GENIUS Act" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">What the law actually requires.</div>
-      <div class="build d2" style="position:absolute;left:2px;top:145px;letter-spacing:0.16em;text-transform:uppercase;font-size:24px;color:var(--jade);">GENIUS Act &nbsp;·&nbsp; Pub. L. 119–27 &nbsp;·&nbsp; Signed July 18, 2025</div>
-      <div class="attrs build d3" style="position:absolute;left:0;top:224px;max-width:1560px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">What the law actually requires.</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:2px;top:145px;letter-spacing:0.16em;text-transform:uppercase;font-size:24px;color:var(--jade);">GENIUS Act &nbsp;·&nbsp; Pub. L. 119–27 &nbsp;·&nbsp; Signed July 18, 2025</div>
+      <div class="attrs" data-peg-animate="fade-up" data-peg-delay="320" style="position:absolute;left:0;top:224px;max-width:1560px;">
         <div class="attr"><b class="k-jade">① 1:1 Reserves</b> — Cash or sub-93-day Treasuries only; no high-yield, no risky assets.</div>
         <div class="attr"><b class="k-jade">② No Interest to Holders</b> — Stablecoins cannot pay yield or offer staking to users.</div>
         <div class="attr"><b class="k-jade">③ Jurisdictional Carve-out</b> — Not a security, not a commodity; SEC &amp; CFTC are excluded.</div>
@@ -327,17 +332,17 @@
   </section>
 
   <!-- ════════════════════ SLIDE 13 · Upside & one myth ════════════════════ -->
-  <section class="paper" data-label="Upside & one myth">
+  <section class="paper" data-label="Upside & one myth" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="build d1" style="position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:22px;">
+      <div data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;display:flex;flex-direction:column;gap:22px;">
         <div class="support mute" style="font-size:34px;">A dollar account for anyone — no US bank</div>
         <div class="support mute" style="font-size:34px;">Cross-border payments in minutes, for cents</div>
         <div class="support mute" style="font-size:34px;">24/7, programmable money</div>
       </div>
       <div style="position:absolute;left:0;top:470px;">
-        <div class="subhead mute build d3" style="font-weight:500;text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--mute);">"Crypto is private and untraceable."</div>
-        <div class="headline build d4" style="margin-top:38px;">Reality: <span class="jade">public, traceable, freezable</span>.</div>
-        <div class="build d5" style="margin-top:40px;font-size:30px;color:var(--mute);"><span class="count tnum" data-to="3.3" data-dec="1" data-pre="$" data-suf="B" data-cdelay="660" style="color:var(--ink);font-weight:600;">$3.3B</span> frozen by issuers — 7,000+ wallets, 2023–25</div>
+        <div class="subhead mute" data-peg-animate="fade-up" data-peg-delay="320" style="font-weight:500;text-decoration:line-through;text-decoration-thickness:3px;text-decoration-color:var(--mute);">"Crypto is private and untraceable."</div>
+        <div class="headline" data-peg-animate="fade-up" data-peg-delay="440" style="margin-top:38px;">Reality: <span class="jade">public, traceable, freezable</span>.</div>
+        <div data-peg-animate="fade-up" data-peg-delay="560" style="margin-top:40px;font-size:30px;color:var(--mute);"><span class="count tnum" data-to="3.3" data-dec="1" data-pre="$" data-suf="B" data-cdelay="660" style="color:var(--ink);font-weight:600;">$3.3B</span> frozen by issuers — 7,000+ wallets, 2023–25</div>
       </div>
     </div>
     <div class="foot-src">Brookings (2025); Chainalysis (2025–26); AMLBot (2025)</div>
@@ -345,9 +350,9 @@
   </section>
 
   <!-- ════════════════════ SLIDE 14 · When it isn't stable ════════════════════ -->
-  <section class="paper" data-label="When it isn't stable">
+  <section class="paper" data-label="When it isn't stable" data-peg-transition="dissolve">
     <div class="frame" style="inset:var(--margin) var(--margin) auto var(--margin);">
-      <div class="headline build d1">When stablecoins aren't stable.</div>
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80">When stablecoins aren't stable.</div>
     </div>
     <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible;">
       <line x1="154" y1="620" x2="1766" y2="620" stroke="#8A8A8E" stroke-width="2" stroke-dasharray="6 10"/>
@@ -360,16 +365,16 @@
     <div class="peg-label" style="position:absolute;left:154px;top:574px;font-size:var(--fz-caption);color:var(--mute);font-variant-numeric:tabular-nums;">$1.00</div>
     <div id="s9-label-usdc" class="caption" style="position:absolute;left:1330px;top:684px;color:var(--alert);font-weight:600;font-size:26px;line-height:1.3;">USDC&nbsp;·&nbsp;<span class="count" data-from="1" data-to="0.87" data-dec="2" data-pre="~$" data-cdelay="1150">~$0.87</span><br><span style="color:var(--mute);font-weight:400;">Mar 2023, bank failure</span></div>
     <div id="s9-label-ust" class="caption" style="position:absolute;left:1090px;width:430px;text-align:right;top:846px;color:var(--alert);font-weight:600;font-size:26px;line-height:1.3;">UST&nbsp;·&nbsp;collapsed<br><span style="color:var(--mute);font-weight:400;">2022, <span class="count" data-to="40" data-pre="~$" data-suf="B" data-cdelay="1700">~$40B</span> gone</span></div>
-    <div class="subhead build d2" style="position:absolute;left:var(--margin);top:330px;color:var(--ink);">Runs, depegs &amp; opaque reserves.</div>
+    <div class="subhead" data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:var(--margin);top:330px;color:var(--ink);">Runs, depegs &amp; opaque reserves.</div>
     <div class="foot-src">Widely reported; Chainalysis, via CryptoTimes (2026)</div>
     <div class="foot-num">14</div>
   </section>
 
   <!-- ════════════════════ SLIDE 15 · The deeper risks ════════════════════ -->
-  <section class="paper" data-label="The deeper risks">
+  <section class="paper" data-label="The deeper risks" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="headline build d1" style="position:absolute;left:0;top:0;">Three deeper risks.</div>
-      <div class="build d2" style="position:absolute;left:0;top:205px;right:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:72px;">
+      <div class="headline" data-peg-animate="fade-up" data-peg-delay="80" style="position:absolute;left:0;top:0;">Three deeper risks.</div>
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;top:205px;right:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:72px;">
         <!-- Fire Sales -->
         <div style="border-top:2px solid rgba(22,24,29,0.16);padding-top:32px;">
           <div style="font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--mute);margin-bottom:20px;">① Systemic Risk</div>
@@ -395,22 +400,22 @@
   </section>
 
   <!-- ════════════════════ SLIDE 16 · Companies or central banks? ════════════════════ -->
-  <section class="paper" data-label="Companies or central banks">
+  <section class="paper" data-label="Companies or central banks" data-peg-transition="dissolve">
     <div class="frame" style="display:flex;flex-direction:column;justify-content:center;">
-      <div class="caption build d1" style="letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);margin-bottom:48px;">Who should issue digital money?</div>
-      <div class="hero build d2" style="font-size:140px;line-height:1.05;">Companies, or<br><span class="jade">central banks</span>?</div>
+      <div class="caption" data-peg-animate="fade-up" data-peg-delay="80" style="letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);margin-bottom:48px;">Who should issue digital money?</div>
+      <div class="hero" data-peg-animate="scale-in" data-peg-delay="200" style="font-size:140px;line-height:1.05;">Companies, or<br><span class="jade">central banks</span>?</div>
     </div>
     <div class="foot-src">Synthesis: Brookings (2025); BIS</div>
     <div class="foot-num">16</div>
   </section>
 
   <!-- ════════════════════ SLIDE 17 · Conclusion & references ════════════════════ -->
-  <section class="paper" data-label="Conclusion & references">
+  <section class="paper" data-label="Conclusion & references" data-peg-transition="dissolve">
     <div class="frame">
-      <div class="subhead build d1" style="max-width:1620px;font-size:52px;line-height:1.18;">
+      <div class="subhead" data-peg-animate="fade-up" data-peg-delay="80" style="max-width:1620px;font-size:52px;line-height:1.18;">
         A stablecoin is a private digital dollar — held at $1 by <span class="jade">reserves and arbitrage</span>, funded by US Treasuries. The GENIUS Act now defines the rules; the deeper risks are still being written.
       </div>
-      <div class="build d2" style="position:absolute;left:0;bottom:0;column-count:2;column-gap:90px;width:100%;font-size:24px;line-height:1.5;color:var(--mute);letter-spacing:0;">
+      <div data-peg-animate="fade-up" data-peg-delay="200" style="position:absolute;left:0;bottom:0;column-count:2;column-gap:90px;width:100%;font-size:24px;line-height:1.5;color:var(--mute);letter-spacing:0;">
         <div style="font-size:26px;color:var(--ink);font-weight:600;margin-bottom:14px;column-span:all;">References</div>
         <p>1. U.S. Congress. <em>GENIUS Act, Pub. L. 119–27.</em> Jul 18, 2025.</p>
         <p>2. Hong Kong SAR. <em>Stablecoins Ordinance (Cap. 656).</em> Eff. 1 Aug 2025.</p>
@@ -461,73 +466,9 @@
 </script>
 
 <script src="deck-stage.js"></script>
+<script src="peg-animate.js"></script>
 <script>
-(function(){
-  const deck = document.querySelector('deck-stage');
-  if(!deck) return;
-  const EASE = 'cubic-bezier(.2,.65,.2,1)';
-  const delayFor = el =>
-    el.classList.contains('d1') ? 80  :
-    el.classList.contains('d2') ? 200 :
-    el.classList.contains('d3') ? 320 :
-    el.classList.contains('d4') ? 440 :
-    el.classList.contains('d5') ? 560 : 0;
-  const canMove = () =>
-    document.visibilityState === 'visible' &&
-    !deck.hasAttribute('noscale') &&
-    !matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  const fmtNum = (v, dec, pre, suf) =>
-    pre + v.toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec}) + suf;
-  function animateCount(el){
-    const to    = parseFloat(el.dataset.to);
-    const from  = el.dataset.from !== undefined ? parseFloat(el.dataset.from) : 0;
-    const dec   = el.dataset.dec   ? parseInt(el.dataset.dec)   : 0;
-    const pre   = el.dataset.pre   || '';
-    const suf   = el.dataset.suf   || '';
-    const dur   = el.dataset.cdur  ? parseInt(el.dataset.cdur)  : 900;
-    const delay = el.dataset.cdelay? parseInt(el.dataset.cdelay): 0;
-    const t0 = performance.now() + delay;
-    el.textContent = fmtNum(from, dec, pre, suf);
-    function frame(now){
-      let t = (now - t0) / dur;
-      if(t < 0){ requestAnimationFrame(frame); return; }
-      if(t >= 1){ el.textContent = fmtNum(to, dec, pre, suf); return; }
-      const e = 1 - Math.pow(1 - t, 3);
-      el.textContent = fmtNum(from + (to - from) * e, dec, pre, suf);
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  function play(slide, index){
-    if(!slide || !canMove()) return;
-    slide.querySelectorAll('.build').forEach(el=>{
-      el.animate(
-        [{opacity:0, transform:'translateY(22px)'},{opacity:1, transform:'none'}],
-        {duration:820, delay:delayFor(el), easing:EASE, fill:'backwards'}
-      );
-    });
-    slide.querySelectorAll('.count').forEach(animateCount);
-    if(index === 13){                      // Slide 14 (0-indexed) — peg-break moment
-      const q = s => slide.querySelector(s);
-      const drop = q('#s9-drop');
-      if(drop) drop.animate([{strokeDashoffset:1200},{strokeDashoffset:0}],
-        {duration:1400, delay:450, easing:'cubic-bezier(.5,0,.6,1)', fill:'backwards'});
-      const fall = (el, d) => el && el.animate(
-        [{opacity:0, transform:'translateY(-24px)'},{opacity:1, transform:'none'}],
-        {duration:720, delay:d, easing:EASE, fill:'backwards'});
-      fall(q('#s9-usdc'), 1050);
-      fall(q('#s9-ust'), 1550);
-      const fade = (el, d) => el && el.animate([{opacity:0},{opacity:1}],
-        {duration:600, delay:d, fill:'backwards'});
-      fade(q('#s9-label-usdc'), 1200);
-      fade(q('#s9-label-ust'), 1700);
-    }
-  }
-
-  deck.addEventListener('slidechange', e => play(e.detail.slide, e.detail.index));
-})();
+  PegAnimate.init('deck-stage');
 </script>
 </body>
 </html>

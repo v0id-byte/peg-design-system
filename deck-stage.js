@@ -1123,10 +1123,63 @@
       // (reload banner path in viewer-handle.ts) lands on the current slide,
       // not the stale deep-link hash from initial load.
       try { history.replaceState(null, '', '#' + (curr + 1)); } catch (e) {}
-      this._slides.forEach((s, i) => {
-        if (i === curr) s.setAttribute('data-deck-active', '');
-        else s.removeAttribute('data-deck-active');
-      });
+
+      const prevSlide = prev >= 0 ? this._slides[prev] : null;
+      const currSlide = this._slides[curr];
+
+      // Slide transition (dissolve / push-left / none)
+      const canTransition = reason !== 'init' &&
+        !this.hasAttribute('noscale') &&
+        !matchMedia('(prefers-reduced-motion:reduce)').matches &&
+        prevSlide && prevSlide !== currSlide;
+
+      const transition = canTransition ?
+        (currSlide.getAttribute('data-peg-transition') || 'none') : 'none';
+
+      if (transition === 'none') {
+        // Original behavior: instant swap
+        this._slides.forEach((s, i) => {
+          if (i === curr) s.setAttribute('data-deck-active', '');
+          else s.removeAttribute('data-deck-active');
+        });
+      } else {
+        // Transition: animate both slides
+        currSlide.setAttribute('data-deck-active', '');
+        // Keep old slide visible during transition
+        // prevSlide already has data-deck-active
+
+        const dur = 500;
+        const easing = 'cubic-bezier(0.65, 0, 0.35, 1)';
+
+        let newKeyframes, oldKeyframes;
+        if (transition === 'dissolve') {
+          newKeyframes = [{opacity: 0}, {opacity: 1}];
+          oldKeyframes = [{opacity: 1}, {opacity: 0}];
+        } else if (transition === 'push-left') {
+          newKeyframes = [
+            {opacity: 0, transform: 'translateX(30px)'},
+            {opacity: 1, transform: 'translateX(0)'}
+          ];
+          oldKeyframes = [
+            {opacity: 1, transform: 'translateX(0)'},
+            {opacity: 0, transform: 'translateX(-30px)'}
+          ];
+        }
+
+        if (newKeyframes) {
+          const newAnim = currSlide.animate(newKeyframes, {duration: dur, easing, fill: 'backwards'});
+          const oldAnim = prevSlide.animate(oldKeyframes, {duration: dur, easing, fill: 'backwards'});
+
+          newAnim.onfinish = () => {
+            prevSlide.removeAttribute('data-deck-active');
+          };
+          // Fallback: ensure cleanup even if onfinish doesn't fire
+          setTimeout(() => {
+            prevSlide.removeAttribute('data-deck-active');
+          }, dur + 50);
+        }
+      }
+
       if (this._countEl) this._countEl.textContent = String(curr + 1);
       // Follow-scroll on every navigation (init deep-link, keyboard, click,
       // tap, external goTo) — the only time we *don't* want the rail to

@@ -236,7 +236,7 @@ Add `data-peg-transition` to `<section>` (slide) elements:
 <section class="paper" data-label="Title" data-peg-transition="dissolve">...</section>
 ```
 
-Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is set on `<deck-stage>`.
+Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is set on `<deck-stage>`. Open `transition-demo.html` to compare cut, dissolve, and push-left.
 
 #### Initialization
 
@@ -385,6 +385,12 @@ tokens/
 ```
 
 可用 `data-peg-bar-duration`、`data-peg-bar-delay`、`data-peg-bar-easing` 单独调整时长、延迟和曲线。DOM 保持最终数值，截图、PDF、PPTX 导出不显示半成品。
+
+页面切换可在 `<section>` 上添加 `data-peg-transition="dissolve"` 或 `data-peg-transition="push-left"`；不设置时为默认瞬切。切换动效尊重 `prefers-reduced-motion`，并在 `noscale` 导出模式下关闭。打开 `transition-demo.html` 可对比 cut、dissolve、push-left。
+
+```html
+<section class="paper" data-label="Title" data-peg-transition="dissolve">...</section>
+```
 
 ---
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide Transition Demo</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="slides/slide-base.css">
+<style>
+  deck-stage:not(:defined) { visibility: hidden; }
+  .demo-frame {
+    position: absolute;
+    inset: var(--slide-margin);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .demo-kicker {
+    font-size: var(--fz-caption);
+    color: var(--fg-muted);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    margin-bottom: 44px;
+  }
+  .demo-title {
+    font-size: 128px;
+    font-weight: var(--fw-bold);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    max-width: 1500px;
+  }
+  .demo-note {
+    position: absolute;
+    left: var(--slide-margin);
+    bottom: var(--slide-foot-b);
+    font-size: var(--fz-caption);
+    color: var(--fg-muted);
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+  <section class="paper" data-label="Cut">
+    <div class="demo-frame">
+      <div class="demo-kicker" data-peg-animate="fade-up">Default cut</div>
+      <h1 class="demo-title" data-peg-animate="fade-up" data-peg-delay="160">This slide enters instantly.</h1>
+    </div>
+    <p class="demo-note">Press → to see dissolve.</p>
+  </section>
+  <section class="paper" data-label="Dissolve" data-peg-transition="dissolve">
+    <div class="demo-frame">
+      <div class="demo-kicker" data-peg-animate="fade-up">Dissolve</div>
+      <h1 class="demo-title" data-peg-animate="letter-spring" data-peg-letter-stagger="28">Soft page fade.</h1>
+    </div>
+    <p class="demo-note">Press → to see push-left.</p>
+  </section>
+  <section class="paper" data-label="Push left" data-peg-transition="push-left">
+    <div class="demo-frame">
+      <div class="demo-kicker" data-peg-animate="fade-up">Push left</div>
+      <h1 class="demo-title" data-peg-animate="fade-up" data-peg-delay="160">A gentle spatial slide change.</h1>
+    </div>
+    <p class="demo-note">Press ← / → to compare transitions.</p>
+  </section>
+</deck-stage>
+<script src="deck-stage.js"></script>
+<script src="peg-animate.js"></script>
+<script>
+  PegAnimate.init('deck-stage');
+</script>
+</body>
+</html>
