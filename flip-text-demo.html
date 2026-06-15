@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flip Text Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070707;
+      --text: #f5f5f7;
+      --muted: #a1a1a6;
+      --line: rgba(255, 255, 255, .12);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 50% 20%, rgba(255, 255, 255, .08), transparent 34%), var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      color: var(--text);
+    }
+
+    main {
+      width: min(920px, calc(100vw - 48px));
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 17px;
+      letter-spacing: -.01em;
+    }
+
+    .flip-frame {
+      position: relative;
+      height: 172px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      perspective: 1200px;
+      border-block: 1px solid var(--line);
+    }
+
+    .flip-text {
+      position: absolute;
+      margin: 0;
+      width: 100%;
+      font-size: clamp(44px, 7vw, 82px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+      font-weight: 650;
+      transform-origin: 50% 0%;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+
+    .flip-text.current {
+      transform: rotateX(0deg) translateY(0);
+      opacity: 1;
+    }
+
+    .flip-text.next {
+      transform-origin: 50% 100%;
+      transform: rotateX(-82deg) translateY(34px);
+      opacity: 0;
+    }
+
+    .flip-frame.is-flipping .flip-text.current {
+      transform: rotateX(82deg) translateY(-34px);
+      opacity: 0;
+      transition: transform 760ms var(--ease), opacity 520ms ease;
+    }
+
+    .flip-frame.is-flipping .flip-text.next {
+      transform: rotateX(0deg) translateY(0);
+      opacity: 1;
+      transition: transform 760ms var(--ease), opacity 520ms ease;
+    }
+
+    button {
+      margin-top: 44px;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      background: #f5f5f7;
+      color: #111;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(.985);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flip-frame.is-flipping .flip-text.current,
+      .flip-frame.is-flipping .flip-text.next {
+        transition: opacity 180ms ease;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Keynote-style text transition</p>
+    <section class="flip-frame" aria-live="polite">
+      <h1 class="flip-text current">稳定币正在重写支付。</h1>
+      <h1 class="flip-text next">下一代金融网络浮现。</h1>
+    </section>
+    <button type="button">下一画面</button>
+  </main>
+
+  <script>
+    const lines = [
+      '稳定币正在重写支付。',
+      '下一代金融网络浮现。',
+      '美元流动性走向链上。',
+      '结算从天缩短到秒。'
+    ]
+
+    const frame = document.querySelector('.flip-frame')
+    const current = document.querySelector('.flip-text.current')
+    const next = document.querySelector('.flip-text.next')
+    const button = document.querySelector('button')
+    let index = 0
+    let locked = false
+
+    button.addEventListener('click', () => {
+      if (locked) return
+      locked = true
+      const nextIndex = (index + 1) % lines.length
+      next.textContent = lines[nextIndex]
+      frame.classList.add('is-flipping')
+
+      window.setTimeout(() => {
+        index = nextIndex
+        current.textContent = lines[index]
+        frame.classList.remove('is-flipping')
+        locked = false
+      }, 820)
+    })
+  </script>
+</body>
+</html>

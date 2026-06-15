@@ -1148,8 +1148,8 @@
         // Keep old slide visible during transition
         // prevSlide already has data-deck-active
 
-        const dur = 500;
-        const easing = 'cubic-bezier(0.65, 0, 0.35, 1)';
+        let dur = 500;
+        let easing = 'cubic-bezier(0.65, 0, 0.35, 1)';
 
         let newKeyframes, oldKeyframes;
         if (transition === 'dissolve') {
@@ -1164,19 +1164,37 @@
             {opacity: 1, transform: 'translateX(0)'},
             {opacity: 0, transform: 'translateX(-30px)'}
           ];
+        } else if (transition === 'text-flip') {
+          dur = 760;
+          easing = 'cubic-bezier(.22, 1, .36, 1)';
+          currSlide.style.transformOrigin = '50% 100%';
+          prevSlide.style.transformOrigin = '50% 0%';
+          currSlide.style.backfaceVisibility = 'hidden';
+          prevSlide.style.backfaceVisibility = 'hidden';
+          newKeyframes = [
+            {opacity: 0, transform: 'perspective(1400px) translateY(46px) rotateX(-78deg)'},
+            {opacity: 1, transform: 'perspective(1400px) translateY(0) rotateX(0deg)'}
+          ];
+          oldKeyframes = [
+            {opacity: 1, transform: 'perspective(1400px) translateY(0) rotateX(0deg)'},
+            {opacity: 0, transform: 'perspective(1400px) translateY(-46px) rotateX(78deg)'}
+          ];
         }
 
         if (newKeyframes) {
           const newAnim = currSlide.animate(newKeyframes, {duration: dur, easing, fill: 'backwards'});
           const oldAnim = prevSlide.animate(oldKeyframes, {duration: dur, easing, fill: 'backwards'});
-
-          newAnim.onfinish = () => {
+          const cleanup = () => {
             prevSlide.removeAttribute('data-deck-active');
+            currSlide.style.transformOrigin = '';
+            prevSlide.style.transformOrigin = '';
+            currSlide.style.backfaceVisibility = '';
+            prevSlide.style.backfaceVisibility = '';
           };
+
+          newAnim.onfinish = cleanup;
           // Fallback: ensure cleanup even if onfinish doesn't fire
-          setTimeout(() => {
-            prevSlide.removeAttribute('data-deck-active');
-          }, dur + 50);
+          setTimeout(cleanup, dur + 50);
         }
       }
 

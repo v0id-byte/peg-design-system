@@ -184,6 +184,7 @@ Add `data-peg-animate` to any element inside a slide:
 | `blur-in` | `opacity 0→1, filter blur(8px)→0` | Background elements |
 | `reveal-right` | `opacity 0→1, translateX(30px)→0` | Flow nodes, list items |
 | `letter-spring` | each character `opacity 0→1, translateY(0.72em)→0` with spring overshoot | One-line title or moment slides |
+| `text-flip` | `opacity 0→1, translateY(0.42em)→0, rotateX(-82deg)→0` | Calm single-line text reveal |
 
 **Delays:** Use `data-peg-delay="80"` (ms) for individual timing.<br>
 **Stagger:** Add `data-peg-stagger="100"` to a parent for automatic sibling delays.<br>
@@ -230,13 +231,14 @@ Add `data-peg-transition` to `<section>` (slide) elements:
 |---|---|
 | `dissolve` | Crossfade (old fades out, new fades in) |
 | `push-left` | New slides in from right, old slides out left |
+| `text-flip` | Old slide flips upward while the new slide flips in from below on the same timeline |
 | `none` | Instant cut (default) |
 
 ```html
-<section class="paper" data-label="Title" data-peg-transition="dissolve">...</section>
+<section class="paper" data-label="Title" data-peg-transition="text-flip">...</section>
 ```
 
-Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is set on `<deck-stage>`. Open `transition-demo.html` to compare cut, dissolve, and push-left.
+Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is set on `<deck-stage>`. Open `transition-demo.html` to compare cut, dissolve, push-left, and text-flip.
 
 #### Initialization
 
@@ -375,6 +377,12 @@ tokens/
 <div class="headline" data-peg-animate="letter-spring">A one-line moment.</div>
 ```
 
+如果需要更克制、无弹性的单行文字翻入，可用 `data-peg-animate="text-flip"`。
+
+```html
+<div class="headline" data-peg-animate="text-flip">A calm upward reveal.</div>
+```
+
 打开 `letter-spring-demo.html` 可预览逐字标题动效。
 
 数据柱、横条、进度条可加 `data-peg-bar`，或直接使用 `.bar-fill` / `.progress-fill`。横向默认从左到右增长；竖向使用 `data-peg-bar="vertical"`，从底部向上增长。
@@ -386,10 +394,10 @@ tokens/
 
 可用 `data-peg-bar-duration`、`data-peg-bar-delay`、`data-peg-bar-easing` 单独调整时长、延迟和曲线。DOM 保持最终数值，截图、PDF、PPTX 导出不显示半成品。
 
-页面切换可在 `<section>` 上添加 `data-peg-transition="dissolve"` 或 `data-peg-transition="push-left"`；不设置时为默认瞬切。切换动效尊重 `prefers-reduced-motion`，并在 `noscale` 导出模式下关闭。打开 `transition-demo.html` 可对比 cut、dissolve、push-left。
+页面切换可在 `<section>` 上添加 `data-peg-transition="dissolve"`、`data-peg-transition="push-left"` 或 `data-peg-transition="text-flip"`；`text-flip` 会让旧画面向上翻出，同时新画面从下方翻入，两个动作在同一时间轴上连贯进行。不设置时为默认瞬切。切换动效尊重 `prefers-reduced-motion`，并在 `noscale` 导出模式下关闭。打开 `transition-demo.html` 可对比 cut、dissolve、push-left、text-flip。
 
 ```html
-<section class="paper" data-label="Title" data-peg-transition="dissolve">...</section>
+<section class="paper" data-label="Title" data-peg-transition="text-flip">...</section>
 ```
 
 ---

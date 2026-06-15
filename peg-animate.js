@@ -111,6 +111,11 @@
         return;
       }
 
+      if (type === 'text-flip') {
+        this._animateTextFlip(el, delay);
+        return;
+      }
+
       const keyframes = this._keyframesForType(type);
       if (!keyframes) return;
 
@@ -155,6 +160,19 @@
           { opacity: 1, transform: 'none' }
         ], { duration, delay: delay + index * stagger, easing, fill: 'backwards' });
       });
+    },
+
+    _animateTextFlip(el, delay) {
+      const duration = parseInt(el.getAttribute('data-peg-duration'), 10) || 760;
+      const easing = el.getAttribute('data-peg-easing') || 'cubic-bezier(.22, 1, .36, 1)';
+      const distance = el.getAttribute('data-peg-flip-distance') || '0.42em';
+
+      el.style.transformOrigin = '50% 100%';
+      el.style.backfaceVisibility = 'hidden';
+      el.animate([
+        { opacity: 0, transform: `translateY(${distance}) rotateX(-82deg)` },
+        { opacity: 1, transform: 'translateY(0) rotateX(0deg)' }
+      ], { duration, delay, easing, fill: 'backwards' });
     },
 
     /** Return keyframes for animation type */

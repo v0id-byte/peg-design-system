@@ -36,6 +36,9 @@
     font-size: var(--fz-caption);
     color: var(--fg-muted);
   }
+  .flip-stage {
+    perspective: 1400px;
+  }
 </style>
 </head>
 <body>
@@ -59,7 +62,14 @@
       <div class="demo-kicker" data-peg-animate="fade-up">Push left</div>
       <h1 class="demo-title" data-peg-animate="fade-up" data-peg-delay="160">A gentle spatial slide change.</h1>
     </div>
-    <p class="demo-note">Press ← / → to compare transitions.</p>
+    <p class="demo-note">Press → to see text-flip.</p>
+  </section>
+  <section class="paper flip-stage" data-label="Text flip" data-peg-transition="text-flip">
+    <div class="demo-frame">
+      <div class="demo-kicker" data-peg-animate="fade-up">Text flip</div>
+      <h1 class="demo-title">A calm upward reveal.</h1>
+    </div>
+    <p class="demo-note">Use data-peg-transition="text-flip" on the next slide.</p>
   </section>
 </deck-stage>
 <script src="deck-stage.js"></script>
