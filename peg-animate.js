@@ -19,7 +19,9 @@
       this._deck = deck;
       this._options = Object.assign({
         reducedMotion: false,
-        defaultEasing: 'var(--ease-reveal, cubic-bezier(0.2, 0.65, 0.2, 1))',
+        // The Web Animations API rejects CSS var() in `easing` — it must be a
+        // literal timing function. Mirror the --ease-reveal token's value here.
+        defaultEasing: 'cubic-bezier(0.2, 0.65, 0.2, 1)',
         defaultDuration: 820,
       }, options);
 
@@ -58,9 +60,13 @@
     play(slide, index) {
       if (!slide || !this._canMove()) return;
 
-      // 1. Build animations (entrance effects)
+      // 1. Build animations (entrance effects). Each element is isolated: a
+      //    bad keyframe/easing on one must never abort the rest of the slide.
       const buildEls = slide.querySelectorAll('[data-peg-animate], .build');
-      buildEls.forEach((el) => this._animateBuild(el));
+      buildEls.forEach((el) => {
+        try { this._animateBuild(el); }
+        catch (e) { if (window.console) console.warn('[peg-animate] skipped', el, e); }
+      });
 
       // 2. Count-up animations
       const countEls = slide.querySelectorAll('[data-peg-count], .count');
