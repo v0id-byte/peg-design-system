@@ -1,6 +1,18 @@
+/* Latin — Inter (SIL OFL 1.1). Variable: weight 100–900. */
 @font-face {
   font-family: 'Inter';
   src: url('../assets/Inter.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: block;
+}
+
+/* CJK — Noto Sans SC (SIL OFL 1.1). Variable: weight 100–900.
+   Inter carries no Han glyphs, so Noto fills every Chinese character
+   via per-glyph fallback. See readme “Fonts & Licenses”. */
+@font-face {
+  font-family: 'Noto Sans SC';
+  src: url('../assets/NotoSansSC.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: block;

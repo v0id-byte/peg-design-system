@@ -1,7 +1,10 @@
 :root {
   /* ─── Font stack ───────────────────────────── */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont,
+  /* Inter for Latin/numerals, Noto Sans SC for 中文 (per-glyph fallback);
+     system CJK fonts as last-resort if the bundled font is unavailable. */
+  --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
                "SF Pro Display", "SF Pro Text",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
                "Helvetica Neue", system-ui, sans-serif;
 
   /* ─── Slide-canvas scale (1920 × 1080 px) ──── */

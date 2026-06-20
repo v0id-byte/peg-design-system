@@ -22,6 +22,7 @@ If working on **production code**, read the token files and the component `.d.ts
 7. All animations gated on visibility state and prefers-reduced-motion. DOM always shows the final end-state.
 8. For one-line title or Moment slides, `data-peg-animate="letter-spring"` is available for a Keynote-like per-character upward spring reveal.
 9. Image/proof slides carry an evidence tag (`.evi` — RENDER / CAD / PCB / PROTOTYPE / APP) and a one-line caption, so the audience always knows what they're seeing and that it's real.
+10. Bilingual: set `lang="zh-CN"` on `<html>` for Chinese decks — `tokens/cjk.css` auto-relaxes tracking/leading and Noto Sans SC renders 汉字 (Inter keeps Latin). Bundle/subset the font with the deck for offline + PDF; never rely on system CJK fonts. Fonts are SIL OFL 1.1 (see readme “Fonts & Licenses”), not MIT — keep the `assets/*-OFL.txt` files with them.
 
 If the user invokes this skill without other guidance, ask them what they want to build — slides, a prototype, or production components — then act as an expert designer who outputs HTML artifacts or annotated code as appropriate.
 

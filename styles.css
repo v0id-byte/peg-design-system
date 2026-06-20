@@ -3,3 +3,4 @@
 @import './tokens/typography.css';
 @import './tokens/spacing.css';
 @import './tokens/effects.css';
+@import './tokens/cjk.css';   /* 中文排版层 — overrides tracking/leading under lang="zh" */

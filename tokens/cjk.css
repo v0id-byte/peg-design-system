@@ -1,0 +1,43 @@
+/* ============================================================
+   PEG · CJK TYPE LAYER — 中文排版层
+   Latin (Inter) is designed for tight, optically-negative tracking and
+   compact leading. Chinese is the opposite: glyphs are full square em-boxes,
+   so the same negative tracking makes them collide and the tight leading
+   makes multi-line headings cramp. These overrides re-tune the type tokens
+   ONLY when the language is Chinese — Latin decks keep their original feel.
+
+   Activated automatically by `lang="zh-…"` on <html> (or any ancestor).
+   ============================================================ */
+
+:root:lang(zh), :root:lang(zh-Hans), :root:lang(zh-CN), [lang^="zh"] {
+  /* 1 — Relax the aggressive Latin tracking. Square CJK glyphs do not want
+     −0.03/−0.04em; that pulls characters into each other. Near-zero reads
+     clean; embedded Latin words (e.g. API, Wi-Fi, USB-C) still look fine. */
+  --ls-wordmark: -0.015em;
+  --ls-hero:     -0.015em;
+  --ls-headline: -0.005em;
+  --ls-subhead:   0em;
+  --ls-support:   0em;
+  --ls-caption:   0em;
+
+  /* 2 — Give CJK room to breathe. Han glyphs fill the em-box top-to-bottom,
+     so display leading of 1.0–1.06 makes stacked lines touch. */
+  --lh-tight: 1.12;   /* wordmark / hero */
+  --lh-snug:  1.18;   /* headline / subhead */
+  --lh-body:  1.6;    /* support / body copy — comfortable for CJK, tight enough for slides */
+}
+
+/* 3 — Break Chinese lines like Chinese: don't hyphenate, keep punctuation
+   from starting a line, and trim the built-in side-bearing of full-width
+   punctuation where the browser supports it (progressive enhancement —
+   silently ignored elsewhere). */
+[lang^="zh"] {
+  line-break: strict;
+  word-break: normal;
+  text-spacing-trim: normal;
+}
+
+/* 4 — A `.latin` escape hatch: put it on a pure-Latin element inside a
+   Chinese deck (e.g. a wordmark or a code token) to restore Inter's tight
+   tracking just for that element. */
+:root:lang(zh) .latin, [lang^="zh"] .latin { letter-spacing: -0.03em; }

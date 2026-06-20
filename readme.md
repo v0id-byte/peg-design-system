@@ -263,9 +263,45 @@ Transitions respect `prefers-reduced-motion` and are disabled when `noscale` is 
 
 ---
 
+### Designing for Chinese (中文)
+
+Peg is bilingual. Latin (Inter) is tuned for tight negative tracking and compact
+leading; Chinese needs the opposite — square em-box glyphs collide under negative
+tracking and cramp under tight leading. `tokens/cjk.css` re-tunes the type tokens
+**only** when the document language is Chinese, so Latin decks are unaffected.
+
+- Set `lang="zh-CN"` (or any `zh-…`) on `<html>` — the CJK layer activates
+  automatically: tracking relaxes toward zero, display leading opens up
+  (`--lh-tight` 1.12 / `--lh-snug` 1.20 / `--lh-body` 1.7).
+- Chinese glyphs render in **Noto Sans SC**; Latin/numerals stay in **Inter**
+  (per-glyph fallback), so a mixed line like “重写 ESP-IDF” looks right.
+- Use the `.latin` class on a pure-Latin element inside a Chinese deck to restore
+  Inter's tight tracking just for that element (e.g. a wordmark).
+- For an offline / portable / PDF-exported Chinese deck, bundle the font with the
+  deck (or a `pyftsubset` subset of the used glyphs) — don't rely on system fonts.
+
+### Fonts & Licenses
+
+The design system's code is **MIT**. The bundled fonts are **not** MIT — they ship
+under the **SIL Open Font License 1.1 (OFL)** and are redistributed here with their
+license text, as the OFL requires:
+
+| Font | Role | License | Source |
+|---|---|---|---|
+| **Inter** by Rasmus Andersson | Latin / numerals | SIL OFL 1.1 — [`assets/Inter-OFL.txt`](assets/Inter-OFL.txt) | github.com/rsms/inter |
+| **Noto Sans SC** by Google | Chinese (简体) | SIL OFL 1.1 — [`assets/NotoSansSC-OFL.txt`](assets/NotoSansSC-OFL.txt) | fonts.google.com/noto |
+
+Under the OFL you may use, embed, and redistribute both fonts (incl. commercially)
+provided the license text travels with them and the fonts are not sold on their own.
+Keep the `*-OFL.txt` files alongside `assets/*.ttf` in any redistribution.
+
+> Repo size note: `assets/NotoSansSC.ttf` is a full variable font (~17 MB). For a
+> shipped deck, subset it to the glyphs you actually use to stay lean.
+
 ### License
 
-MIT — use freely in commercial and personal projects.
+**Code & design tokens:** MIT — use freely in commercial and personal projects.
+**Bundled fonts (`assets/*.ttf`):** SIL OFL 1.1 (see *Fonts & Licenses* above).
 
 ---
 
@@ -424,6 +460,29 @@ tokens/
 
 ---
 
+### 中文排版
+
+Peg 双语可用。拉丁字体(Inter)为强负字距 + 紧凑行高而调;中文恰好相反——方块字在负字距下会相互挤撞、在紧行高下多行会发闷。`tokens/cjk.css` **仅在文档语言为中文时**重新调校排版 token,英文 deck 不受影响。
+
+- 在 `<html>` 上设 `lang="zh-CN"`(或任意 `zh-…`),中文排版层自动生效:字距放松趋近 0,显示行高打开(`--lh-tight` 1.12 / `--lh-snug` 1.20 / `--lh-body` 1.7)。
+- 汉字用 **Noto Sans SC** 渲染,拉丁字母/数字仍用 **Inter**(逐字回退),所以「重写 ESP-IDF」这种中英混排也对。
+- 中文 deck 里若有纯拉丁元素(如品牌字标),给它加 `.latin` 类即可单独恢复 Inter 的紧字距。
+- 离线/换机/导 PDF 的中文 deck:把字体随 deck 打包(或用 `pyftsubset` 子集化到实际用字),**不要**依赖系统字体。
+
+### 字体与许可
+
+设计系统的**代码是 MIT**;但随附字体**不是 MIT**——它们以 **SIL 开源字体许可 1.1(OFL)** 发布,并按 OFL 要求随附了许可证全文:
+
+| 字体 | 用途 | 许可 | 来源 |
+|---|---|---|---|
+| **Inter**(Rasmus Andersson) | 拉丁 / 数字 | SIL OFL 1.1 — [`assets/Inter-OFL.txt`](assets/Inter-OFL.txt) | github.com/rsms/inter |
+| **Noto Sans SC**(Google) | 简体中文 | SIL OFL 1.1 — [`assets/NotoSansSC-OFL.txt`](assets/NotoSansSC-OFL.txt) | fonts.google.com/noto |
+
+OFL 允许自由使用、嵌入、再分发(含商用),前提是**许可证文本随字体一同保留**、且不得单独售卖字体本身。再分发时请把 `*-OFL.txt` 与 `assets/*.ttf` 一起带上。
+
+> 仓库体积提示:`assets/NotoSansSC.ttf` 是完整可变字体(~17 MB);打包成 deck 时请子集化到实际用字以保持精简。
+
 ### 许可证
 
-MIT — 可自由用于商业及个人项目。
+**代码与设计 token:** MIT — 可自由用于商业及个人项目。
+**随附字体(`assets/*.ttf`):** SIL OFL 1.1(见上方「字体与许可」)。
