@@ -46,7 +46,7 @@ Key characteristics:
 
 ---
 
-### Seven Slide Templates
+### Eight Slide Templates
 
 | Template | Purpose |
 |---|---|
@@ -57,6 +57,17 @@ Key characteristics:
 | **Chips** | Labelled category grid with context |
 | **Attr List** | Define something with 3–4 bold-term properties |
 | **Moment** | Centred full-frame question or provocation |
+| **Media / Proof** | Show real renders, CAD, PCB, photos, screenshots — full-bleed, split (text + figure), or a 2–4 figure proof wall |
+
+#### Media / Proof slides
+
+Three image layouts, all on-language (hairline frames, no shadows, captions in caption type):
+
+- `<section class="media-full">` — the image **is** the slide (Night letterbox). Children: `<img class="media-img contain">` (use `contain` to show a whole part, drop it to fill/crop), optional `.media-scrim`, `.media-label`, `.media-title`, `.media-cap`.
+- `<section class="paper media-split">` — text on the left (`.media-text`), one framed `<figure class="media-figure">` on the right.
+- `<section class="paper media-wall">` — a `.wall` of 2–4 `<figure class="cell">`, each with a `.fig` and a `<figcaption>`.
+
+Every image slide should carry an evidence tag (`.evi` → RENDER / CAD / PCB / PROTOTYPE / APP) and a one-line caption, so the audience knows what they're looking at and that it's real.
 
 ---
 
@@ -286,7 +297,7 @@ MIT — use freely in commercial and personal projects.
 
 ---
 
-### 七种幻灯片模板
+### 八种幻灯片模板
 
 | 模板 | 用途 |
 |---|---|
@@ -297,6 +308,17 @@ MIT — use freely in commercial and personal projects.
 | **Chips（分类页）** | 带标签的分类网格 |
 | **Attr List（属性页）** | 3–4 条粗体术语定义列表 |
 | **Moment（转场页）** | 居中全屏问句或论点 |
+| **Media / Proof（实证页）** | 放真实渲染图/CAD/PCB/实物照/截图——整幅、图文左右分栏、或 2–4 图实证墙 |
+
+#### 实证 / 图片页
+
+三种图片版式,均遵循设计语言(细线边框、无阴影、说明用 caption 字号):
+
+- `<section class="media-full">` — 整幅:图片**就是**整页(Night 信箱底)。子元素:`<img class="media-img contain">`(`contain` 显示完整零件,去掉则填满裁切)、可选 `.media-scrim`、`.media-label`、`.media-title`、`.media-cap`。
+- `<section class="paper media-split">` — 左文右图:左侧 `.media-text`,右侧一个带框 `<figure class="media-figure">`。
+- `<section class="paper media-wall">` — 实证墙:一个 `.wall` 里放 2–4 个 `<figure class="cell">`,每个含 `.fig` + `<figcaption>`。
+
+每张图片页都应带**证据标签**(`.evi` → RENDER / CAD / PCB / PROTOTYPE / APP)和一句说明,让观众清楚自己看到的是什么、且确为真实产物。
 
 ---
 

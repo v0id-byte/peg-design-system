@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# local tooling / settings (never publish)
+.claude/
+.opencode/
+
+# generated decks live on the Desktop, never in the design-system repo
+decks/

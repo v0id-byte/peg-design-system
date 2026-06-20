@@ -57,3 +57,53 @@ section.paper { background: var(--color-paper); color: var(--color-ink); }
 .stats { display: flex; gap: 140px; }
 .stat .stat-n { font-size: 96px; font-weight: var(--fw-bold); letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
 .stat .stat-l { font-size: 26px; color: var(--fg-muted); margin-top: 18px; letter-spacing: 0; line-height: 1.3; }
+
+/* ── Media / Proof slides ─────────────────────────────────────
+   Image-led layouts for real renders, CAD, PCB, prototype photos and
+   screenshots — the evidence that "we built this". Three patterns:
+   full-bleed, split (text + figure), wall (2–4 figures).
+   On-language: hairline frames only (no shadows, no radius), captions in
+   caption type, jade used once. Do NOT set position/size on the <section>
+   itself — deck-stage owns the slide box; position the children instead.
+
+   An "evidence tag" (.evi) is a small-caps source label — RENDER / CAD /
+   PCB / PROTOTYPE / APP — so the audience always knows what they're seeing. */
+.evi { font-size: 20px; font-weight: var(--fw-semibold); letter-spacing: .18em; text-transform: uppercase; color: var(--color-jade); }
+
+/* (A) Full-bleed — the image IS the slide; letterbox tone behind it. */
+section.media-full { background: var(--color-night); color: var(--fg-inverse); }
+.media-full .media-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.media-full .media-img.contain { object-fit: contain; }            /* show whole part, no crop */
+.media-full .media-scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 420px;
+  background: linear-gradient(to top, rgba(11,11,12,.78), rgba(11,11,12,0)); pointer-events: none; }
+.media-full .media-scrim.top { top: 0; bottom: auto; height: 320px;
+  background: linear-gradient(to bottom, rgba(11,11,12,.72), rgba(11,11,12,0)); }
+.media-full .media-label { position: absolute; left: var(--slide-margin); top: 96px;
+  font-size: 22px; font-weight: var(--fw-medium); letter-spacing: .16em; text-transform: uppercase; color: rgba(250,250,248,.72); }
+.media-full .media-title { position: absolute; left: var(--slide-margin); right: var(--slide-margin); bottom: 150px;
+  font-size: var(--fz-subhead); font-weight: var(--fw-semibold); letter-spacing: var(--ls-subhead); line-height: var(--lh-snug); }
+.media-full .media-cap { position: absolute; left: var(--slide-margin); right: var(--slide-margin); bottom: var(--slide-foot-b);
+  font-size: var(--fz-caption); color: rgba(250,250,248,.82); letter-spacing: 0; }
+.media-full .media-cap b { font-weight: var(--fw-semibold); color: #fff; }
+.media-full .media-cap .jade, .media-full .media-title .jade { color: var(--color-jade); }
+
+/* (B) Split — text on paper (left), one framed figure (right). */
+.media-split .media-text { position: absolute; left: var(--slide-margin); top: var(--slide-margin); width: 640px; }
+.media-split .media-figure { position: absolute; right: var(--slide-margin); top: var(--slide-margin); bottom: var(--slide-margin);
+  width: 880px; border: 1px solid var(--border-subtle); background: var(--color-paper);
+  display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.media-split .media-figure img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.media-split .media-figure.cover img { object-fit: cover; }
+.media-split .media-figure figcaption { position: absolute; left: 28px; bottom: 22px;
+  font-size: var(--fz-caption); color: var(--fg-muted); letter-spacing: 0; }
+
+/* (C) Wall — 2–4 framed figures in a row, each captioned (实证墙). */
+.media-wall .wall { position: absolute; left: var(--slide-margin); right: var(--slide-margin); top: 420px; bottom: var(--slide-margin);
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 48px; }
+.media-wall .cell { display: flex; flex-direction: column; min-width: 0; }
+.media-wall .cell .fig { flex: 1 1 auto; min-height: 0; border: 1px solid var(--border-subtle); background: var(--color-paper);
+  display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.media-wall .cell .fig img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.media-wall .cell .fig.cover img { object-fit: cover; }
+.media-wall .cell figcaption { margin-top: 22px; font-size: var(--fz-caption); color: var(--fg-muted); letter-spacing: 0; line-height: 1.32; }
+.media-wall .cell figcaption b { color: var(--color-ink); font-weight: var(--fw-semibold); }
