@@ -18,7 +18,7 @@ section.paper { background: var(--color-paper); color: var(--color-ink); }
 .caption  { font-size: var(--fz-caption);  font-weight: var(--fw-regular); color: var(--fg-muted); letter-spacing: 0; }
 
 /* Colour utilities */
-.jade  { color: var(--color-jade); }
+.jade  { color: var(--accent); }
 .alert { color: var(--color-alert); }
 .mute  { color: var(--color-mute); }
 .tnum  { font-variant-numeric: tabular-nums; }
@@ -37,7 +37,7 @@ section.paper { background: var(--color-paper); color: var(--color-ink); }
 /* ── Flow band ───────────────────────────────────────────── */
 .flow { position: absolute; left: var(--slide-margin); right: var(--slide-margin); top: 505px; display: flex; align-items: center; }
 .flow .node { flex: 0 0 auto; font-size: 52px; font-weight: var(--fw-semibold); letter-spacing: -0.02em; line-height: 1.05; white-space: nowrap; color: var(--color-ink); }
-.flow .node.jade { color: var(--color-jade); }
+.flow .node.jade { color: var(--accent); }
 .flow .conn { flex: 1 1 0; height: 2px; background: var(--border-subtle); position: relative; margin: 0 46px; }
 .flow .conn::after { content: ""; position: absolute; right: -1px; top: 50%; transform: translateY(-50%); border-left: 15px solid var(--border-default); border-top: 9px solid transparent; border-bottom: 9px solid transparent; }
 
@@ -51,7 +51,7 @@ section.paper { background: var(--color-paper); color: var(--color-ink); }
 .attrs { display: flex; flex-direction: column; gap: 42px; }
 .attrs .attr { font-size: 42px; font-weight: var(--fw-regular); line-height: 1.18; letter-spacing: -0.01em; color: var(--fg-muted); }
 .attrs .attr b { font-weight: var(--fw-semibold); color: var(--color-ink); }
-.attrs .attr b.jade { color: var(--color-jade); }
+.attrs .attr b.jade { color: var(--accent); }
 
 /* ── Stat pair ───────────────────────────────────────────── */
 .stats { display: flex; gap: 140px; }
@@ -68,7 +68,7 @@ section.paper { background: var(--color-paper); color: var(--color-ink); }
 
    An "evidence tag" (.evi) is a small-caps source label — RENDER / CAD /
    PCB / PROTOTYPE / APP — so the audience always knows what they're seeing. */
-.evi { font-size: 20px; font-weight: var(--fw-semibold); letter-spacing: .18em; text-transform: uppercase; color: var(--color-jade); }
+.evi { font-size: 20px; font-weight: var(--fw-semibold); letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
 
 /* (A) Full-bleed — the image IS the slide; letterbox tone behind it. */
 section.media-full { background: var(--color-night); color: var(--fg-inverse); }
@@ -85,7 +85,7 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
 .media-full .media-cap { position: absolute; left: var(--slide-margin); right: var(--slide-margin); bottom: var(--slide-foot-b);
   font-size: var(--fz-caption); color: rgba(250,250,248,.82); letter-spacing: 0; }
 .media-full .media-cap b { font-weight: var(--fw-semibold); color: #fff; }
-.media-full .media-cap .jade, .media-full .media-title .jade { color: var(--color-jade); }
+.media-full .media-cap .jade, .media-full .media-title .jade { color: var(--accent); }
 
 /* (B) Split — text on paper (left), one framed figure (right). */
 .media-split .media-text { position: absolute; left: var(--slide-margin); top: var(--slide-margin); width: 640px; }
@@ -107,3 +107,20 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
 .media-wall .cell .fig.cover img { object-fit: cover; }
 .media-wall .cell figcaption { margin-top: 22px; font-size: var(--fz-caption); color: var(--fg-muted); letter-spacing: 0; line-height: 1.32; }
 .media-wall .cell figcaption b { color: var(--color-ink); font-weight: var(--fw-semibold); }
+
+/* ── Headline paired with a figure ────────────────────────────
+   When a headline shares the slide with a diagram/figure (left text +
+   right figure, or a narrow media-split column), step it DOWN one size so
+   the two elements balance — a full 92px headline next to a diagram shouts.
+   Apple pairs medium type with imagery, big type with whitespace. */
+.headline.with-fig { font-size: 68px; }
+.media-split .media-text .headline { font-size: 56px; line-height: var(--lh-snug); }
+
+/* ── Summary line below a diagram ─────────────────────────────
+   A one-line takeaway placed UNDER a 2-box / flow / chart, centered, so the
+   eye lands on the diagram first and then naturally drops to the conclusion.
+   Pattern: [short intro] → [diagram] → [.summary takeaway]. */
+.summary { position: absolute; left: var(--slide-margin); right: var(--slide-margin); text-align: center;
+  font-size: var(--fz-support); font-weight: var(--fw-regular); line-height: var(--lh-snug);
+  color: var(--color-ink); letter-spacing: var(--ls-support); }
+.summary .mute { color: var(--color-mute); }

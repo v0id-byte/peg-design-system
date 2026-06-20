@@ -21,4 +21,21 @@
   --border-chip:    rgba(22, 24, 29, 0.16);
   --border-subtle:  rgba(22, 24, 29, 0.22);
   --border-default: rgba(22, 24, 29, 0.34);
+
+  /* ─── Topic accents (muted, meaning-bearing) ──────────────────
+     A restrained, Apple-keynote palette: low-saturation hues that read
+     calm on Paper, never neon. Give each a MEANING and use ONE per
+     section — colour the section's eyebrow, its one highlighted keyword,
+     and its diagram accent the SAME hue (per-module consistency). */
+  --topic-control:  #128A6B;   /* teal   — real-time control / signal   */
+  --topic-silicon:  #3A6AA0;   /* blue   — electronics / PCB / silicon  */
+  --topic-material: #8C6B38;   /* bronze — material / industrial design */
+  --topic-safety:   #AC5A3C;   /* clay   — safety-critical (not alarm)  */
+  --topic-algo:     #6A57A0;   /* violet — algorithm / intelligence     */
+  --topic-growth:   #4F8A52;   /* sage   — data / growth / flywheel     */
+
+  /* The active accent for a section — defaults to the brand jade.
+     Set `--accent: var(--topic-…)` on a <section> to theme that slide;
+     accent utilities (.jade text, diagram strokes, .evi tag) follow it. */
+  --accent: var(--color-jade);
 }

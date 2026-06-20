@@ -103,9 +103,22 @@ tokens/
 | `--color-paper` | `#FAFAF8` | Only background — warm, never cold |
 | `--color-ink` | `#16181D` | Primary text and lines |
 | `--color-night` | `#0B0B0C` | Stage chrome, outer letterbox |
-| `--color-jade` | `#00A878` | Single accent — one use per slide |
+| `--color-jade` | `#00A878` | Default accent — one use per slide |
 | `--color-alert` | `#E5484D` | Danger only — losses, risk, collapse |
 | `--color-mute` | `#8A8A8E` | Labels, footnotes, secondary text |
+
+**Topic accents (muted, meaning-bearing).** For a multi-section deck, give each section its own *calm* hue instead of jade everywhere — set `--accent: var(--topic-…)` on the `<section>` and every accent utility (`.jade` text, `.evi` tag, diagram strokes `.s-jade`/`.box-j`/`.t-j`/`.f-jade`) follows it automatically. Keep them muted (Apple-keynote, never neon) and consistent per module (eyebrow = keyword = diagram = same hue).
+
+| Token | Value | Meaning |
+|---|---|---|
+| `--topic-control` | `#128A6B` | teal — real-time control / signal |
+| `--topic-silicon` | `#3A6AA0` | blue — electronics / PCB |
+| `--topic-material` | `#8C6B38` | bronze — material / industrial design |
+| `--topic-safety` | `#AC5A3C` | clay — safety-critical (not alarm-red) |
+| `--topic-algo` | `#6A57A0` | violet — algorithm / intelligence |
+| `--topic-growth` | `#4F8A52` | sage — data / growth |
+
+**Layout patterns.** `.headline.with-fig` steps the headline down a size when it shares the slide with a diagram; `.media-split .media-text .headline` does the same for a narrow text column; `.summary` is a centered one-line takeaway placed *below* a diagram so the eye reads the diagram then drops to the conclusion.
 
 ---
 
@@ -196,6 +209,9 @@ Add `data-peg-animate` to any element inside a slide:
 | `reveal-right` | `opacity 0→1, translateX(30px)→0` | Flow nodes, list items |
 | `letter-spring` | each character `opacity 0→1, translateY(0.72em)→0` with spring overshoot | One-line title or moment slides |
 | `text-flip` | `opacity 0→1, translateY(0.42em)→0, rotateX(-82deg)→0` | Calm single-line text reveal |
+| `draw` | SVG stroke draws on along its own path (`stroke-dashoffset` len→0) | **Lines, waveforms, chart curves, flow connectors** — a transient left-to-right *sweep*, never a perpetual loop |
+
+**Drawing lines & flows (the silky bit).** Put `data-peg-animate="draw"` on a **solid** SVG `<path>`/`<line>` (not an intentionally-dashed one) and it sweeps on left-to-right; duration follows `--dur-draw`, override with `data-peg-duration`. For a **flow / timeline that reveals left-to-right**, draw the baseline/connector with `draw` and stagger the nodes one-by-one (`data-peg-stagger` on the parent `<g>`, `data-peg-animate="fade-up"` on each node) with increasing `data-peg-delay`. The resting DOM is the full solid stroke, so screenshots / PDF export always show the finished line.
 
 **Delays:** Use `data-peg-delay="80"` (ms) for individual timing.<br>
 **Stagger:** Add `data-peg-stagger="100"` to a parent for automatic sibling delays.<br>
@@ -436,6 +452,10 @@ tokens/
 ```
 
 如果需要更克制、无弹性的单行文字翻入，可用 `data-peg-animate="text-flip"`。
+
+**线条 / 波形 / 流程图的丝滑动效。** 给**实线** SVG `<path>`/`<line>`(不要给本就虚线的)加 `data-peg-animate="draw"`，它会沿自身路径**从左到右扫出**(`stroke-dashoffset`，时长跟随 `--dur-draw`)——用于折线、波形、图表曲线、流程连线;是一次性的扫入,不是无限循环(无限循环是廉价感来源)。**让流程/路程图从左到右依次出现**:基线/连线用 `draw`,节点用 `data-peg-stagger`(父 `<g>`)+ `data-peg-animate="fade-up"`(每个节点)配合递增 `data-peg-delay`。静止 DOM 始终是完整实线,截图 / PDF 导出显示成品。
+
+**多幕配色:** 给每个 `<section>` 设 `--accent: var(--topic-…)`(见上方主题色表),该页所有强调元素(关键词、`.evi`、图表线)自动跟随;低饱和、每页一种、同页一致。**图文同页**用 `.headline.with-fig` 把标题降一档;**图下结论**用 `.summary` 居中放在图的下方做引导。
 
 ```html
 <div class="headline" data-peg-animate="text-flip">A calm upward reveal.</div>

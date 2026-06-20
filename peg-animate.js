@@ -116,6 +116,11 @@
         return;
       }
 
+      if (type === 'draw') {
+        this._animateDraw(el, delay);
+        return;
+      }
+
       const keyframes = this._keyframesForType(type);
       if (!keyframes) return;
 
@@ -173,6 +178,31 @@
         { opacity: 0, transform: `translateY(${distance}) rotateX(-82deg)` },
         { opacity: 1, transform: 'translateY(0) rotateX(0deg)' }
       ], { duration, delay, easing, fill: 'backwards' });
+    },
+
+    /**
+     * Draw an SVG stroke on, left-to-right along its own path.
+     * For lines, waveforms, chart curves, flow connectors — a transient,
+     * purposeful "sweep" (NOT a perpetual loop). Final DOM state is the full
+     * solid stroke, so screenshots / PDF export show the finished line.
+     * Apply to SOLID strokes only (not to intentionally-dashed paths).
+     */
+    _animateDraw(el, delay) {
+      let len = 0;
+      try { len = el.getTotalLength ? el.getTotalLength() : 0; } catch (e) { len = 0; }
+      if (!len) {
+        el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600, delay, fill: 'backwards' });
+        return;
+      }
+      const cssDur = parseInt(getComputedStyle(el).getPropertyValue('--dur-draw'), 10);
+      const duration = parseInt(el.getAttribute('data-peg-duration'), 10) || cssDur || 1200;
+      const easing = el.getAttribute('data-peg-easing') || 'cubic-bezier(.22, 1, .36, 1)';
+      // dasharray = full length so offset:len hides it, offset:0 shows the whole stroke
+      el.style.strokeDasharray = len;
+      el.animate(
+        [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+        { duration, delay, easing, fill: 'backwards' }
+      );
     },
 
     /** Return keyframes for animation type */
