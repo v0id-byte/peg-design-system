@@ -23,6 +23,7 @@ If working on **production code**, read the token files and the component `.d.ts
 8. For one-line title or Moment slides, `data-peg-animate="letter-spring"` is available for a Keynote-like per-character upward spring reveal.
 9. Image/proof slides carry an evidence tag (`.evi` — RENDER / CAD / PCB / PROTOTYPE / APP) and a one-line caption, so the audience always knows what they're seeing and that it's real.
 10. Bilingual: set `lang="zh-CN"` on `<html>` for Chinese decks — `tokens/cjk.css` auto-relaxes tracking/leading and Noto Sans SC renders 汉字 (Inter keeps Latin). Bundle/subset the font with the deck for offline + PDF; never rely on system CJK fonts. Fonts are SIL OFL 1.1 (see readme “Fonts & Licenses”), not MIT — keep the `assets/*-OFL.txt` files with them.
+11. Mixed audience (experts + non-experts, e.g. execs/officials): add a `.plain` one-sentence plain-language explainer under the headline (accent left-rule, see template 11). Keep the technical content as smaller support; the plain line carries everyone else. Frame achievements as **problem → solution / before → after / iteration**, not raw mechanism — show it's impressive and that *you* built it (real renders, CAD, PCB), without requiring the audience to follow the math.
 
 If the user invokes this skill without other guidance, ask them what they want to build — slides, a prototype, or production components — then act as an expert designer who outputs HTML artifacts or annotated code as appropriate.
 

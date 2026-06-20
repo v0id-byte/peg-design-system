@@ -127,3 +127,16 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
   font-size: var(--fz-support); font-weight: var(--fw-regular); line-height: var(--lh-snug);
   color: var(--color-ink); letter-spacing: var(--ls-support); }
 .summary .mute { color: var(--color-mute); }
+
+/* ── Plain-language explainer line ────────────────────────────
+   A one-sentence "in plain words" gloss, placed UNDER the headline, for a
+   non-expert audience (e.g. execs, officials) sharing the room with experts.
+   The slide keeps its technical content; this line just makes it land for
+   everyone. An accent left-rule marks it as "the human version".
+   Place its `top` clearly below the headline (mind 2-line headlines), and on a
+   headline+figure slide cap its width to the text column so it never runs
+   under the figure. Bold the one phrase that matters. */
+.plain { position: absolute; left: 0; font-size: 33px; font-weight: var(--fw-medium);
+  line-height: 1.5; color: #34373E; letter-spacing: -0.01em; max-width: 1480px;
+  padding-left: 24px; border-left: 5px solid var(--accent); }
+.plain b { color: var(--color-ink); font-weight: var(--fw-bold); }
