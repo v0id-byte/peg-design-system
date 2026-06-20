@@ -115,6 +115,9 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
    Apple pairs medium type with imagery, big type with whitespace. */
 .headline.with-fig { font-size: 68px; }
 .media-split .media-text .headline { font-size: 56px; line-height: var(--lh-snug); }
+/* narrow text column: shrink the supporting list so the headline leads (hierarchy) */
+.media-split .media-text .attrs { gap: 26px; margin-top: 44px; }
+.media-split .media-text .attrs .attr { font-size: 30px; line-height: 1.3; }
 
 /* ── Summary line below a diagram ─────────────────────────────
    A one-line takeaway placed UNDER a 2-box / flow / chart, centered, so the
