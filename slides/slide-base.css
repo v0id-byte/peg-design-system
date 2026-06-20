@@ -140,3 +140,23 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
   line-height: 1.5; color: #34373E; letter-spacing: -0.01em; max-width: 1480px;
   padding-left: 24px; border-left: 5px solid var(--accent); }
 .plain b { color: var(--color-ink); font-weight: var(--fw-bold); }
+
+/* ── Before → After / problem→solution compare table ──────────
+   The single clearest way to show ITERATION to a non-expert: a column of rows,
+   each "what used to be wrong (muted)" → "what we now do (ink, accent keyword)".
+   Put it early as an at-a-glance summary, then let later slides expand each row.
+   `.badge-first` flags the genuinely first-of-kind rows — use sparingly and
+   only where you can back the claim. */
+.compare { position: absolute; left: var(--slide-margin); right: var(--slide-margin);
+  display: flex; flex-direction: column; }
+.compare.spread { justify-content: space-between; }          /* fill a fixed height */
+.compare .row { display: flex; align-items: baseline; gap: 30px; padding-top: 18px;
+  border-top: 1px solid var(--border-subtle); font-size: 30px; line-height: 1.36; }
+.compare .was { flex: 0 0 600px; color: var(--color-mute); }
+.compare .was b { color: var(--color-ink); font-weight: var(--fw-semibold); }
+.compare .arrow { flex: 0 0 auto; color: var(--color-mute); }
+.compare .now { flex: 1; color: var(--color-ink); }
+.compare .now b { color: var(--accent); font-weight: var(--fw-bold); }
+.badge-first { display: inline-block; font-size: 20px; font-weight: var(--fw-semibold);
+  color: var(--accent); border: 1.5px solid var(--accent); border-radius: var(--radius-pill);
+  padding: 1px 13px; margin-left: 6px; letter-spacing: 0.02em; }

@@ -118,7 +118,7 @@ tokens/
 | `--topic-algo` | `#6A57A0` | violet — algorithm / intelligence |
 | `--topic-growth` | `#4F8A52` | sage — data / growth |
 
-**Layout patterns.** `.headline.with-fig` steps the headline down a size when it shares the slide with a diagram; `.media-split .media-text .headline` does the same for a narrow text column; `.summary` is a centered one-line takeaway placed *below* a diagram so the eye reads the diagram then drops to the conclusion; **`.plain`** is a one-sentence *plain-language explainer* (accent left-rule) placed under the headline for a non-expert audience — the slide keeps its technical content, this line just makes it land for everyone (bold the one phrase that matters; on a headline+figure slide cap its `max-width` to the text column; mind 2-line headlines when setting `top`). See template 11 in `slides/`.
+**Layout patterns.** `.headline.with-fig` steps the headline down a size when it shares the slide with a diagram; `.media-split .media-text .headline` does the same for a narrow text column; `.summary` is a centered one-line takeaway placed *below* a diagram so the eye reads the diagram then drops to the conclusion; **`.plain`** is a one-sentence *plain-language explainer* (accent left-rule) placed under the headline for a non-expert audience — the slide keeps its technical content, this line just makes it land for everyone (bold the one phrase that matters; on a headline+figure slide cap its `max-width` to the text column; mind 2-line headlines when setting `top`). See template 11 in `slides/`. **`.compare`** is a before→after / problem→solution table (rows of *old limitation* → *what we now do*) — the clearest way to show **iteration** at a glance; `.badge-first` flags genuinely first-of-kind rows (use sparingly, back the claim). See template 12.
 
 ---
 
@@ -455,7 +455,7 @@ tokens/
 
 **线条 / 波形 / 流程图的丝滑动效。** 给**实线** SVG `<path>`/`<line>`(不要给本就虚线的)加 `data-peg-animate="draw"`，它会沿自身路径**从左到右扫出**(`stroke-dashoffset`，时长跟随 `--dur-draw`)——用于折线、波形、图表曲线、流程连线;是一次性的扫入,不是无限循环(无限循环是廉价感来源)。**让流程/路程图从左到右依次出现**:基线/连线用 `draw`,节点用 `data-peg-stagger`(父 `<g>`)+ `data-peg-animate="fade-up"`(每个节点)配合递增 `data-peg-delay`。静止 DOM 始终是完整实线,截图 / PDF 导出显示成品。
 
-**多幕配色:** 给每个 `<section>` 设 `--accent: var(--topic-…)`(见上方主题色表),该页所有强调元素(关键词、`.evi`、图表线)自动跟随;低饱和、每页一种、同页一致。**图文同页**用 `.headline.with-fig` 把标题降一档;**图下结论**用 `.summary` 居中放在图的下方做引导;**`.plain`(大白话行)** 放在标题下、带主题色竖条,给非专业观众一句人话——幻灯片保留技术内容,这行只让所有人都看懂(加粗最关键那半句;图文同页要限 `max-width` 到文字栏;两行标题时注意 `top` 别压住)。样本见 `slides/` 模板 11。
+**多幕配色:** 给每个 `<section>` 设 `--accent: var(--topic-…)`(见上方主题色表),该页所有强调元素(关键词、`.evi`、图表线)自动跟随;低饱和、每页一种、同页一致。**图文同页**用 `.headline.with-fig` 把标题降一档;**图下结论**用 `.summary` 居中放在图的下方做引导;**`.plain`(大白话行)** 放在标题下、带主题色竖条,给非专业观众一句人话——幻灯片保留技术内容,这行只让所有人都看懂(加粗最关键那半句;图文同页要限 `max-width` 到文字栏;两行标题时注意 `top` 别压住)。样本见 `slides/` 模板 11。**`.compare`(前后对比表)** 每行「过去的局限 → 现在怎么做」,是给非专业观众**一眼看懂"迭代了什么"**最有效的形式;`.badge-first` 给真正"行业首创"的行打徽标(少用、且要有依据)。样本见模板 12。
 
 ```html
 <div class="headline" data-peg-animate="text-flip">A calm upward reveal.</div>
