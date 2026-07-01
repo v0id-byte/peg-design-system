@@ -69,6 +69,8 @@ Three image layouts, all on-language (hairline frames, no shadows, captions in c
 
 Every image slide should carry an evidence tag (`.evi` → RENDER / CAD / PCB / PROTOTYPE / APP) and a one-line caption, so the audience knows what they're looking at and that it's real.
 
+`media-wall`'s row height and headline size are both pinned by CSS for real photography, not just curated screenshots: the wall's single grid row is forced to `1fr` (real product photos with mixed aspect ratios could otherwise inflate the row past the wall's own box and clip captions), and `.media-wall .headline` is stepped down to 56px so a two-line title never runs into the wall below it. Don't override these back to `auto` / the default 92px unless every image and headline on that slide has been checked at full length.
+
 ---
 
 ### Five Core React Components
@@ -371,6 +373,8 @@ Keep the `*-OFL.txt` files alongside `assets/*.ttf` in any redistribution.
 - `<section class="paper media-wall">` — 实证墙:一个 `.wall` 里放 2–4 个 `<figure class="cell">`,每个含 `.fig` + `<figcaption>`。
 
 每张图片页都应带**证据标签**(`.evi` → RENDER / CAD / PCB / PROTOTYPE / APP)和一句说明,让观众清楚自己看到的是什么、且确为真实产物。
+
+`media-wall` 的行高与标题字号都是为**真实产品照片**(而不只是精挑细选的截图)特意钉死的:墙内单行网格强制 `1fr`(否则不同长宽比的真实照片会把行高撑爆,超出墙自身的框、切掉下方说明文字);`.media-wall .headline` 也降到了 56px,防止两行标题压到下方的墙。除非已经用完整长度的图片和标题走过一遍效果,否则不要把它们改回 `auto` / 默认的 92px。
 
 ---
 

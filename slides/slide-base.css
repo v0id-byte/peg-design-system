@@ -97,11 +97,17 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
 .media-split .media-figure figcaption { position: absolute; left: 28px; bottom: 22px;
   font-size: var(--fz-caption); color: var(--fg-muted); letter-spacing: 0; }
 
-/* (C) Wall — 2–4 framed figures in a row, each captioned (实证墙). */
+/* (C) Wall — 2–4 framed figures in a row, each captioned (实证墙).
+   grid-auto-rows: 1fr forces the (single) row to the wall's own fixed height —
+   without it, "auto" row sizing can size to a tall source photo's intrinsic
+   height instead of the container, pushing captions past the slide's bottom
+   edge (clipped by the section's overflow:hidden). Bit us on real product
+   photography with mixed aspect ratios; the curated demo screenshots never
+   triggered it, which is why it shipped unnoticed. */
 .media-wall .wall { position: absolute; left: var(--slide-margin); right: var(--slide-margin); top: 420px; bottom: var(--slide-margin);
-  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 48px; }
-.media-wall .cell { display: flex; flex-direction: column; min-width: 0; }
-.media-wall .cell .fig { flex: 1 1 auto; min-height: 0; border: 1px solid var(--border-subtle); background: var(--color-paper);
+  display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; grid-auto-rows: 1fr; gap: 48px; }
+.media-wall .cell { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
+.media-wall .cell .fig { flex: 1 1 auto; min-height: 0; min-width: 0; border: 1px solid var(--border-subtle); background: var(--color-paper);
   display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .media-wall .cell .fig img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .media-wall .cell .fig.cover img { object-fit: cover; }
@@ -118,6 +124,12 @@ section.media-full { background: var(--color-night); color: var(--fg-inverse); }
 /* narrow text column: shrink the supporting list so the headline leads (hierarchy) */
 .media-split .media-text .attrs { gap: 26px; margin-top: 44px; }
 .media-split .media-text .attrs .attr { font-size: 30px; line-height: 1.3; }
+/* .media-wall's wall starts at a FIXED top:420px (see above) — a full 92px
+   headline that wraps to two lines (longer titles, or translated/localized
+   copy) runs past that line and collides with the wall's top edge. Stepping
+   the headline down here, baked into the template, means authors don't have
+   to remember to shrink it by hand on every media-wall slide. */
+.media-wall .headline { font-size: 56px; line-height: 1.18; max-width: 1650px; }
 
 /* ── Summary line below a diagram ─────────────────────────────
    A one-line takeaway placed UNDER a 2-box / flow / chart, centered, so the
